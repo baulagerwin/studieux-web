@@ -1,0 +1,23 @@
+.input {
+  font-size: 1.3rem;
+
+  @include respond(tablet) {
+    font-size: 1.8rem;
+  }
+
+  input {
+    width: 100%;
+    font-size: 1.4rem;
+    padding: 1rem;
+    background-color: inherit;
+    border-radius: 0.2rem;
+    border: 1px solid $first-color;
+    outline: none;
+    margin-top: 0.4rem;
+    font-family: inherit;
+
+    @include respond(tablet) {
+      font-size: 1.8rem;
+    }
+  }
+}

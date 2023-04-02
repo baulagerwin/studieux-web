@@ -1,0 +1,50 @@
+// 1em = 16px
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone-small {
+    @media (max-width: 20em) {
+      @content;
+    } // 320px
+  }
+
+  @if $breakpoint == phone-medium {
+    @media (max-width: 23.4375em) {
+      @content;
+    } // 375px
+  }
+
+  @if $breakpoint == phone-large {
+    @media (max-width: 34.37em) {
+      @content;
+    } // 550px
+  }
+
+  @if $breakpoint == tablet {
+    @media (max-width: 48em) {
+      @content;
+    } // 768px
+  }
+
+  @if $breakpoint == laptop-small {
+    @media (max-width: 64em) {
+      @content;
+    } // 1024px
+  }
+
+  @if $breakpoint == laptop-medium {
+    @media (max-width: 75em) {
+      @content;
+    } // 1200px
+  }
+
+  @if $breakpoint == laptop-large {
+    @media (min-width: 90em) {
+      @content;
+    } // 1440px
+  }
+
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) {
+      @content;
+    } // 1800px
+  }
+}

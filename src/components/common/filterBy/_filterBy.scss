@@ -1,0 +1,100 @@
+.filter-by {
+  position: relative;
+  width: 100%;
+
+  &__button {
+    font-family: inherit;
+    font-size: 1.6rem;
+    padding: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: $first-color-tinter;
+    color: $first-color;
+    width: 100%;
+
+    svg {
+      height: 1.8rem;
+    }
+
+    @include respond(phone-large) {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__current {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  &__items {
+    list-style-type: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 0.4rem;
+    border: 1px solid $first-color-tinter;
+    margin-top: 0.4rem;
+    visibility: hidden;
+    width: 100%;
+    padding: 0.4rem 0;
+    background-color: white;
+    z-index: 1;
+  }
+
+  &__slider {
+    display: flex;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  &__text {
+    flex-shrink: 0;
+    width: 100%;
+    user-select: none;
+    font-size: 1.6rem;
+    padding: 1rem;
+    word-break: break-word;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $first-color-tinter;
+    }
+
+    @include respond(phone-large) {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__aside {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 1;
+    padding: 1rem;
+
+    &--edit {
+      background-color: $edit-color;
+      border-radius: 0.4rem;
+
+      svg {
+        color: white;
+        height: 2rem;
+      }
+    }
+
+    &--delete {
+      background-color: $delete-color;
+      border-radius: 0.4rem;
+
+      svg {
+        color: white;
+        height: 2rem;
+      }
+    }
+  }
+}

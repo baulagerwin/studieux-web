@@ -1,0 +1,43 @@
+.slideshow-loader {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      height: 3rem;
+      width: 18rem;
+      background-color: $loading-color;
+      border-radius: 0.4rem;
+    }
+
+    div {
+      height: 3rem;
+      background-color: $loading-color;
+      width: 10rem;
+      border-radius: 0.4rem;
+    }
+  }
+
+  &__window {
+    overflow-x: hidden;
+  }
+
+  &__list {
+    display: flex;
+    gap: 3.5rem;
+  }
+
+  &__item {
+    height: 20rem;
+    width: 20rem;
+    flex-shrink: 0;
+    background-color: $loading-color;
+    border-radius: 0.4rem;
+  }
+}

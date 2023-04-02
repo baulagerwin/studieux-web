@@ -1,0 +1,33 @@
+.search {
+  position: relative;
+  width: 100%;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 2rem);
+    transform: translate(-50%, -50%);
+
+    width: 2rem;
+    height: 2rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid $first-color;
+    border-radius: 0.4rem;
+    font-size: 1.6rem;
+    font-family: inherit;
+    transition: 0.1s outline;
+
+    &:hover,
+    &:focus {
+      outline: 2px solid #cec9ec;
+    }
+
+    @include respond(phone-large) {
+      font-size: 1.8rem;
+    }
+  }
+}

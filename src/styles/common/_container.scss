@@ -1,0 +1,8 @@
+.container {
+  max-width: 114rem;
+  margin: 0 auto;
+
+  @include respond(laptop-medium) {
+    padding: 0rem 2rem;
+  }
+}

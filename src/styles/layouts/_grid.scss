@@ -1,0 +1,51 @@
+.grid {
+  display: grid;
+}
+
+.grid-col-2 {
+  grid-template-columns: repeat(2, 1fr);
+
+  @include respond(phone-large) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-col-4 {
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+
+  @include respond(phone-large) {
+    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  }
+}
+
+.grid-col-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid-col-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.grid-col-8 {
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.grid-span-max {
+  grid-column: 1 / -1;
+}
+
+.gap-1 {
+  gap: 1rem;
+
+  @include respond(phone-large) {
+    gap: 1rem;
+  }
+}
+
+.gap-2 {
+  gap: 2rem;
+}
+
+.gap-4 {
+  gap: 4rem;
+}

@@ -1,0 +1,19 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: calc(100vh - $navbar-height);
+  transform: translateY(-4rem);
+
+  p {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  span {
+    font-size: 10rem;
+    font-weight: 700;
+  }
+}

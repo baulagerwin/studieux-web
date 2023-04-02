@@ -1,0 +1,50 @@
+.navbar-loader {
+  height: $navbar-height;
+  width: 100%;
+  position: fixed;
+  background-color: white;
+  box-shadow: 0.1rem 0.1rem 0.4rem 0.2rem #c7c5d1;
+  z-index: 1;
+
+  .contents {
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    max-width: 114rem;
+    margin: 0 auto;
+
+    &__logo {
+      height: 3.4rem;
+      width: 15rem;
+      border-radius: 0.4rem;
+      background-color: $loading-color;
+    }
+  }
+
+  .links {
+    display: flex;
+    gap: 3rem;
+
+    &__link {
+      font-size: 1.6rem;
+      position: relative;
+      height: 2.6rem;
+      border-radius: 0.4rem;
+      width: 6rem;
+      background-color: $loading-color;
+    }
+
+    .menu {
+      height: 2rem;
+      width: 2rem;
+      display: none;
+      // display: flex;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+    }
+  }
+}

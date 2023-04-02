@@ -1,0 +1,89 @@
+.pagination {
+  display: flex;
+  position: relative;
+
+  &__items-container {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 7.8rem;
+    overflow: auto;
+    background-color: white;
+    height: 24rem;
+    width: 20rem;
+    border-radius: 0.4rem;
+    visibility: hidden;
+  }
+
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  &__item {
+    height: 4rem;
+    width: 4rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: $first-color-shade;
+
+    &:hover {
+      background-color: $first-color-tint;
+      border-radius: 0.4rem;
+      color: white;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 1.4rem;
+    border: 1px solid white;
+    border-radius: 0.4rem;
+    background-color: $first-color-tinter;
+    cursor: pointer;
+
+    svg {
+      height: 1.4rem;
+      width: 1.4rem;
+      color: $first-color-shade;
+    }
+  }
+
+  &__details {
+    font-size: 1.4rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  &__divider {
+    color: $first-color-shade;
+    font-size: 1rem;
+  }
+
+  &__length {
+    color: $first-color-shade;
+  }
+
+  &__button {
+    padding: 0.8rem 1rem;
+    border: 1px solid white;
+    border-radius: 0.4rem;
+    background-color: $first-color-tinter;
+    color: $first-color-shade;
+    cursor: pointer;
+
+    svg {
+      height: 1.4rem;
+      width: 1.4rem;
+    }
+  }
+}

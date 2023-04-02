@@ -1,0 +1,143 @@
+.u__navbar--offset {
+  padding-top: $navbar-height;
+  margin-bottom: 18rem;
+}
+
+.u__active--page {
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 200%);
+    display: block;
+    height: 0.3rem;
+    width: 60%;
+    background-color: $third-color;
+
+    @include respond(phone-large) {
+      content: "";
+      height: 0rem;
+    }
+  }
+
+  @include respond(phone-large) {
+    background-color: $third-color;
+    color: white;
+    opacity: 0.8;
+  }
+}
+
+.u__third--color {
+  color: $third-color;
+}
+
+.u__animation--shake {
+  animation: shake 400ms ease-in-out;
+}
+
+.u__text-error--color {
+  color: $error-color !important;
+}
+
+.u__input-error--border {
+  border-color: $error-color !important;
+}
+
+.u__bg--grey {
+  background-color: #f4f4f4;
+}
+
+.u__toast--container {
+  font-size: 1.6rem;
+
+  @include respond(phone-large) {
+    font-size: 2rem;
+  }
+}
+
+.u__animation--pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.u__visibility--visible {
+  visibility: visible !important;
+}
+
+.u__dropDown--height {
+  height: 19.2rem !important;
+  overflow-y: scroll;
+}
+
+.u__dropDown--open {
+  background-color: $first-color-tint !important;
+}
+
+.u__dropDown--active {
+  background-color: $first-color-tinter !important;
+}
+
+.u__page-number--active {
+  background-color: $first-color-tinter;
+  border-radius: 0.4rem;
+  color: $first-color !important;
+}
+
+.u__box--shadow {
+  box-shadow: 0.1rem 0.1rem 0.4rem 0.2rem #c7c5d1;
+}
+
+.u__accordion--active {
+  background-color: $first-color-tinter;
+}
+
+.u__accordion-icon--active {
+  transform: rotate(-45deg);
+}
+
+.u__accordion-margin-bottom--1 {
+  margin-bottom: 32rem;
+}
+
+.u__accordion-margin-bottom--2 {
+  margin-bottom: 24rem;
+}
+
+.u__accordion-margin-bottom--3 {
+  margin-bottom: 16rem;
+}
+
+.u__accordion-margin-bottom--4 {
+  margin-bottom: 8rem;
+}
+
+.u__accordion-margin-bottom--5 {
+  margin-bottom: 0rem;
+}
+
+.u__navbar--flex {
+  display: flex !important;
+}
+
+.u__text--center {
+  text-align: center;
+}
+
+.u__margin--right {
+  margin-right: 0rem;
+
+  @include respond(phone-large) {
+    margin-right: 2rem;
+  }
+}
+
+.u__rotate--180 {
+  transform: rotateY(180deg);
+}
+
+.u__position--absolute {
+  position: absolute;
+}

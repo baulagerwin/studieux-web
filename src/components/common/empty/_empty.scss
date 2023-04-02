@@ -1,0 +1,29 @@
+.empty {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  border-radius: 0.4rem;
+
+  &__box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      height: 24rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  p {
+    font-size: 1.8rem;
+    font-weight: 300;
+
+    @include respond(phone-large) {
+      text-align: center;
+    }
+  }
+}

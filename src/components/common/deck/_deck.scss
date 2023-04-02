@@ -1,0 +1,10 @@
+.deck {
+  position: relative;
+  height: 500px;
+  width: 350px;
+
+  @include respond(phone-medium) {
+    height: 450px;
+    width: 300px;
+  }
+}

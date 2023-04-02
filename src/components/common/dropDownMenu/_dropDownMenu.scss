@@ -1,0 +1,72 @@
+.drop-down {
+  position: relative;
+  width: 100%;
+
+  &__button {
+    font-family: inherit;
+    font-size: 1.6rem;
+    padding: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: $first-color-tinter;
+    color: $first-color;
+    width: 100%;
+
+    @include respond(tablet) {
+      font-size: 1.8rem;
+    }
+
+    svg {
+      height: 1.8rem;
+    }
+  }
+
+  &__current {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  &__label {
+    @include respond(phone-large) {
+      display: none;
+    }
+  }
+
+  &__items {
+    list-style-type: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 0.4rem;
+    border: 1px solid $first-color-tinter;
+    margin-top: 0.4rem;
+    height: auto;
+    visibility: hidden;
+    width: 100%;
+    padding: 0.4rem 0;
+    background-color: white;
+    z-index: 1;
+  }
+
+  &__text {
+    flex-shrink: 0;
+    width: 100%;
+    user-select: none;
+    font-size: 1.6rem;
+    padding: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $first-color-tinter;
+    }
+
+    @include respond(tablet) {
+      font-size: 1.8rem;
+    }
+  }
+}

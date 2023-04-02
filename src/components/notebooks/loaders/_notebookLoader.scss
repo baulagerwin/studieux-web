@@ -1,0 +1,135 @@
+.notebook-loader {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 4rem 0rem;
+
+  .jumbotron {
+    background-color: $loading-color;
+    border-radius: 0.4rem;
+    height: 32rem;
+    padding: 1rem 4rem;
+  }
+
+  &__filters {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr 1fr auto auto;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+  }
+
+  &__search {
+    grid-column: 1 / span 4;
+    background-color: $loading-color;
+    height: 4rem;
+    border-radius: 0.4rem;
+  }
+
+  &__edit {
+    background-color: $loading-color;
+    height: 4rem;
+    border-radius: 0.4rem;
+    padding: 2rem;
+  }
+
+  &__delete {
+    background-color: $loading-color;
+    height: 4rem;
+    border-radius: 0.4rem;
+    padding: 2rem;
+  }
+
+  &__filter-by {
+    grid-column: 1 / 2;
+    grid-row: 2 / span 1;
+    background-color: $loading-color;
+    height: 4rem;
+    border-radius: 0.4rem;
+
+    @include respond(phone-large) {
+      grid-column: 1 / span 3;
+    }
+  }
+
+  &__sort-by {
+    background-color: $loading-color;
+    height: 4rem;
+    border-radius: 0.4rem;
+    width: 20rem;
+
+    @include respond(phone-large) {
+      grid-column: 4 / 6;
+    }
+  }
+
+  &__mini-menu {
+    grid-column: 6 / span 1;
+    grid-row: 2 / span 1;
+
+    background-color: $loading-color;
+    height: 4rem;
+    border-radius: 0.4rem;
+    padding: 2rem;
+  }
+
+  &__hr {
+    background-color: $loading-color;
+  }
+
+  &__details {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    @include respond(phone-large) {
+      align-items: center;
+    }
+
+    &--desktop {
+      font-size: 1.6rem;
+      font-weight: 400;
+      background-color: $loading-color;
+      height: 2rem;
+      border-radius: 0.4rem;
+      width: 20rem;
+
+      @include respond(phone-large) {
+        display: none;
+      }
+    }
+
+    &--mobile {
+      font-size: 1.6rem;
+      font-weight: 400;
+      display: none;
+      background-color: $loading-color;
+      height: 2rem;
+      border-radius: 0.4rem;
+      width: 10rem;
+
+      @include respond(phone-large) {
+        display: block;
+      }
+    }
+  }
+
+  &__pagination {
+    background-color: $loading-color;
+    height: 3rem;
+    border-radius: 0.4rem;
+    width: 10rem;
+  }
+
+  &__accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__accordion-item {
+    background-color: $loading-color;
+    height: 6rem;
+    border-radius: 0.4rem;
+    width: 100%;
+  }
+}

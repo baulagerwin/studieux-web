@@ -1,0 +1,23 @@
+@keyframes shake {
+  25% {
+    transform: translateX(6px);
+  }
+
+  50% {
+    transform: translateX(-6px);
+  }
+
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
