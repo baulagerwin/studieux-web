@@ -1,0 +1,9 @@
+.boxes-loader {
+  list-style-type: none;
+
+  &__item {
+    height: 24rem;
+    border-radius: 0.4rem;
+    background-color: $loading-color;
+  }
+}

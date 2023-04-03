@@ -12,6 +12,13 @@
     height: 2rem;
   }
 
+  &__oval {
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 0.5rem);
+    transform: translate(-50%, -50%);
+  }
+
   input {
     width: 100%;
     padding: 1rem;

@@ -1,7 +1,5 @@
 import blackboard from "../../assets/blackboard.png";
 import Search from "../common/search/Search";
-import Edit from "../common/button/Edit";
-import Delete from "../common/button/Delete";
 import Jumbotron from "../common/jumbotron/Jumbotron";
 import useNotebook from "./hooks/useNotebook";
 import {
@@ -27,6 +25,8 @@ import getPages from "../../utils/getPages";
 import usePagination from "../../hooks/usePagination";
 import NotebookLoader from "./loaders/NotebookLoader";
 import validateObjectId from "../../utils/validateObjectId";
+import Mini from "../common/button/Mini";
+import AccordionLoader from "../common/accordion/loader/AccordionLoader";
 
 function Notebook() {
   const params = useParams();
@@ -50,7 +50,7 @@ function Notebook() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, debouncedSearch, onSearchChange] = useSearch("q", "");
   const [filterBy, onFilterBy] = useFilter("filterBy", "All Topics");
-  const [sortBy, onSortBy] = useSortBy("sortKey", "A - Z");
+  const [sortBy, onSortBy] = useSortBy("sortBy", "A - Z");
   const [page, onPageChange, pageSize] = usePagination(
     "page",
     1,
@@ -121,9 +121,44 @@ function Notebook() {
                   setSearchParams(searchParams);
                   onSearchChange(e);
                 }}
+                isLoading={false}
               />
-              <Edit onOpen={() => onActivePopUp(popUpKeys.editNotebook)} />
-              <Delete onOpen={() => onActivePopUp(popUpKeys.deleteNotebook)} />
+              <Mini
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.2}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                    />
+                  </svg>
+                }
+                onOpen={() => onActivePopUp(popUpKeys.editNotebook)}
+              />
+              <Mini
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.2}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                    />
+                  </svg>
+                }
+                onOpen={() => onActivePopUp(popUpKeys.deleteNotebook)}
+              />
               <FilterBy
                 label={""}
                 cN="notebook__filter-by"
@@ -216,7 +251,7 @@ function Notebook() {
             {Boolean(!qna.qnas.results.length) && !Boolean(search) && (
               <Empty item="question and answer" />
             )}
-            {Boolean(qna.qnas.results.length) && (
+            {Boolean(qna.qnas.results.length) && !qna.isFetching && (
               <Accordion
                 items={qna.qnas.results}
                 onSwipeRight={(item) => {
@@ -228,6 +263,9 @@ function Notebook() {
                   qna.initializer(item);
                 }}
               />
+            )}
+            {Boolean(qna.qnas.results.length) && qna.isFetching && (
+              <AccordionLoader />
             )}
             {Boolean(!qna.qnas.results.length) && Boolean(search) && (
               <ZeroResults />

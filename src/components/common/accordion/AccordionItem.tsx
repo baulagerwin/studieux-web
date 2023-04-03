@@ -102,8 +102,8 @@ function AccordionItem<
     if (!sideButtonRef.current) return;
     let sideButtonWidth = sideButtonRef.current.offsetWidth;
 
-    if (isSwiped && positionDiff >= sideButtonWidth) onSwipeRight(item);
-    if (isSwiped && positionDiff <= -sideButtonWidth) onSwipeLeft(item);
+    if (isSwiped && positionDiff >= sideButtonWidth && !isOpen) onSwipeRight(item);
+    if (isSwiped && positionDiff <= -sideButtonWidth && !isOpen) onSwipeLeft(item);
 
     setIsDown(false);
     setIsSwiped(false);

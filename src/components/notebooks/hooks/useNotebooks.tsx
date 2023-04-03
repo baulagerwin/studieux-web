@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useIsFetching, useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 import keys from "../../../react-query/keys";
 import notebookService from "../../../services/notebookService";
@@ -20,6 +20,7 @@ function useNotebooks(): [
   string,
   (e: React.ChangeEvent<HTMLInputElement>) => void,
   boolean,
+  boolean,
   INotebook[]
 ] {
   const [searchParams] = useSearchParams();
@@ -39,7 +40,11 @@ function useNotebooks(): [
 
   const [search, debouncedSearch, onSearchChange] = useSearch("q", "");
 
-  const { data: notebooks = [], isLoading: isNotebooksLoading } = useQuery(
+  const {
+    data: notebooks = [],
+    isLoading: isNotebooksLoading,
+    isFetching: isNotebooksFetching,
+  } = useQuery(
     [keys.notebooks, debouncedSearch],
     () => notebookService.get(searchParams.toString()),
     {
@@ -59,6 +64,7 @@ function useNotebooks(): [
     debouncedSearch,
     onSearchChange,
     isNotebooksLoading,
+    isNotebooksFetching,
     notebooks,
   ];
 }

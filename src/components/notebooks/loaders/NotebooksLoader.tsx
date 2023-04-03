@@ -1,23 +1,19 @@
+import BoxesLoader from "../../common/boxes/loader/BoxesLoader";
+import MiniLoader from "../../common/button/loader/MiniLoader";
+import JumbotronLoader from "../../common/jumbotron/loader/JumbotronLoader";
+import SearchLoader from "../../common/search/loader/SearchLoader";
+
 function NotebooksLoader() {
   return (
     <div className="u__navbar--offset">
       <div className="container">
-        <div className="notebooks-loader u__animation--pulse">
-          <div className="jumbotron"></div>
+        <div className="notebooks-loader">
+          <JumbotronLoader />
           <div className="search-and-create">
-            <div className="search-and-create__search"></div>
-            <div className="search-and-create__create"></div>
+            <SearchLoader />
+            <MiniLoader />
           </div>
-          <ul className="groups grid grid-col-4 gap-4">
-            <li className="groups__item"></li>
-            <li className="groups__item"></li>
-            <li className="groups__item"></li>
-            <li className="groups__item"></li>
-            <li className="groups__item"></li>
-            <li className="groups__item"></li>
-            <li className="groups__item"></li>
-            <li className="groups__item"></li>
-          </ul>
+          <BoxesLoader />
         </div>
       </div>
     </div>

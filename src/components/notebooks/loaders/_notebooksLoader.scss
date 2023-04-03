@@ -4,30 +4,9 @@
   gap: 2rem;
   padding: 4rem 0rem;
 
-  .jumbotron {
-    background-color: $loading-color;
-    border-radius: 0.4rem;
-    height: 32rem;
-    padding: 1rem 4rem;
-  }
-
   .search-and-create {
     display: flex;
-    gap: 1rem;
-
-    &__search {
-      flex: 1;
-      background-color: $loading-color;
-      height: 4.4rem;
-      border-radius: 0.4rem;
-    }
-
-    &__create {
-      border-radius: 0.4rem;
-      background-color: $loading-color;
-      height: 4.4rem;
-      width: 4.4rem;
-    }
+    gap: 2rem;
   }
 
   .groups {

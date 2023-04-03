@@ -21,7 +21,7 @@
       height: 1.8rem;
     }
 
-    @include respond(phone-large) {
+    @include respond(tablet) {
       font-size: 1.8rem;
     }
   }
@@ -65,7 +65,7 @@
       background-color: $first-color-tinter;
     }
 
-    @include respond(phone-large) {
+    @include respond(tablet) {
       font-size: 1.8rem;
     }
   }

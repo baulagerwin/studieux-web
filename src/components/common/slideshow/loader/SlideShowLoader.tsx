@@ -1,7 +1,7 @@
 function SlideShowLoader() {
   return (
     <div className="slideshow-loader u__animation--pulse">
-      <div className="slideshow-loader__header">
+      <div className="slideshow-loader__header u__margin--right">
         <span></span>
         <div></div>
       </div>

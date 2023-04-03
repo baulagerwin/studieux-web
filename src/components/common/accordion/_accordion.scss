@@ -68,15 +68,17 @@
     font-weight: 500;
     flex: 1;
     margin: 1rem 1rem 1rem 0rem;
+
+    @include respond(phone-large) {
+    }
   }
 
   &__answer {
     font-size: 1.8rem;
     font-weight: 300;
-    padding: 1rem 2rem 2rem 2rem;
+    padding: 0.5rem 2rem 2rem 4rem;
     white-space: pre-line;
     width: 100%;
-    margin-left: 4rem;
     word-break: break-word;
   }
 

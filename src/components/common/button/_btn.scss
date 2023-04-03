@@ -37,7 +37,11 @@
   border: 1px solid $first-color;
 
   @include respond(phone-large) {
-    // font-size: ;
+    flex-basis: 50%;
+  }
+
+  @include respond(phone-medium) {
+    font-size: 1.6rem;
   }
 
   &:hover {
@@ -52,6 +56,10 @@
   background-color: $error-color;
   display: flex;
   justify-content: center;
+
+  @include respond(phone-medium) {
+    font-size: 1.6rem;
+  }
 }
 
 .btn--search {

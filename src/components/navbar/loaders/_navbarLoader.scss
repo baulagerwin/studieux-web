@@ -15,6 +15,10 @@
     max-width: 114rem;
     margin: 0 auto;
 
+    @include respond(phone-large) {
+      padding: 2rem;
+    }
+
     &__logo {
       height: 3.4rem;
       width: 15rem;
@@ -25,7 +29,7 @@
 
   .links {
     display: flex;
-    gap: 3rem;
+    gap: 2rem;
 
     &__link {
       font-size: 1.6rem;
@@ -34,15 +38,24 @@
       border-radius: 0.4rem;
       width: 6rem;
       background-color: $loading-color;
+
+      @include respond(phone-large) {
+        display: none;
+      }
     }
 
     .menu {
-      height: 2rem;
-      width: 2rem;
+      height: 3.5rem;
+      width: 3.5rem;
       display: none;
-      // display: flex;
       justify-content: center;
       align-items: center;
+      background-color: $loading-color;
+      border-radius: 0.4rem;
+
+      @include respond(phone-large) {
+        display: flex;
+      }
 
       cursor: pointer;
     }

@@ -38,7 +38,7 @@ function Review() {
     : "";
   const queryString = searchQueryString + `page=${page}&pageSize=${pageSize}`;
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, isFetching } = useQuery(
     [keys.reviews, notebookId, queryString],
     () => reviewService.get(notebookId, queryString),
     {
@@ -131,6 +131,7 @@ function Review() {
                 setPage(1);
                 onSearchChange(e);
               }}
+              isLoading={isFetching}
             />
           </div>
           {Boolean(!items.length) && !Boolean(search) && (

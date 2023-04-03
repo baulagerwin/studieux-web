@@ -4,9 +4,10 @@ import IQNA from "../../qnas/model/IQNA";
 
 interface Props {
   qna: IQNA;
+  windowWidth: number;
 }
 
-function SwipeableCard({ qna }: Props) {
+function SwipeableCard({ qna, windowWidth }: Props) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isDown, setIsDown] = useState(false);
 
@@ -65,8 +66,8 @@ function SwipeableCard({ qna }: Props) {
   return (
     <TinderCard
       className="u__position--absolute"
-      swipeRequirementType="position"
-      swipeThreshold={150}
+      swipeRequirementType={windowWidth > 768 ? "position" : "velocity"}
+      swipeThreshold={windowWidth > 768 ? 300 : 0.5}
     >
       <div className="swipeable-card">
         <div

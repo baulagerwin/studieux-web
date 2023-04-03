@@ -1,12 +1,12 @@
-.review-loader {
+.accordion-loader {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 4rem 0rem;
 
-  &__search {
+  &__item {
     background-color: $loading-color;
-    height: 4rem;
+    height: 5.6rem;
     border-radius: 0.4rem;
+    width: 100%;
   }
 }

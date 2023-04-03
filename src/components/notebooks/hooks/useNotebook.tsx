@@ -28,6 +28,7 @@ function useNotebook(notebookId: string): [
       results: IQNA[];
     };
     isLoading: boolean;
+    isFetching: boolean;
     initializer: (qna: IQNA) => void;
   },
   IQNAForm
