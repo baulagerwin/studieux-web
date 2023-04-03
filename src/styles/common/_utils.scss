@@ -36,7 +36,7 @@
 }
 
 .u__animation--shake {
-  animation: shake 200ms ease-in-out;
+  animation: shake 400ms ease-in-out;
 }
 
 .u__text-error--color {
@@ -140,4 +140,12 @@
 
 .u__position--absolute {
   position: absolute;
+}
+
+.u__load-more--margin {
+  margin-right: 0rem;
+
+  @include respond(phone-large) {
+    margin-right: 2rem;
+  }
 }

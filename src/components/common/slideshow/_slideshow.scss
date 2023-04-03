@@ -31,6 +31,10 @@
     list-style-type: none;
     display: inline-flex;
     gap: 3.4rem;
+
+    @include respond(phone-large) {
+      gap: 2rem;
+    }
   }
 
   &__item {

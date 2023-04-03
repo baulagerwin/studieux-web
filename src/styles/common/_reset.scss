@@ -25,17 +25,9 @@ html {
     font-size: 50%; // 1 rem = 8px, 8/16 = 50%
   }
 
-  // @include respond(phone-large) {
-  //   font-size: 46.84%; // 1 rem = 7px, 7/16 = 43.75%
-  // }
-
-  // @include respond(phone-large) {
-  //   font-size: 46.84%; // 1 rem = 7px, 7/16 = 43.75%
-  // }
-
-  // @include respond(phone-small) {
-  //   font-size: 37.5%; // 1 rem = 6px, 6/16 = 37.5%
-  // }
+  @include respond(phone-small) {
+    font-size: 37.5%; // 1 rem = 6px, 6/16 = 37.5%
+  }
 }
 
 body {

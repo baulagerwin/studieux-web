@@ -12,11 +12,12 @@
     width: 20rem;
     border-radius: 0.4rem;
     visibility: hidden;
+    z-index: 1;
   }
 
   &__items {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(4rem, 4rem));
     padding: 1rem;
   }
 

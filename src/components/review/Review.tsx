@@ -145,11 +145,11 @@ function Review() {
               }}
               hasMore={items.length < data.count}
               loader={
-                <>
+                <div className="u__load-more--margin">
                   <SlideShowLoader />
                   <SlideShowLoader />
                   <SlideShowLoader />
-                </>
+                </div>
               }
               dataLength={items.length}
               scrollThreshold={1}

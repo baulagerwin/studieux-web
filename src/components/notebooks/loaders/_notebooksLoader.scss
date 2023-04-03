@@ -7,6 +7,10 @@
   .search-and-create {
     display: flex;
     gap: 2rem;
+
+    @include respond(phone-large) {
+      gap: 1rem;
+    }
   }
 
   .groups {

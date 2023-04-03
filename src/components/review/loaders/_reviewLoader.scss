@@ -5,4 +5,8 @@
   padding: 4rem 0rem;
   max-width: 114rem;
   margin: 0 auto;
+
+  @include respond(phone-large) {
+    padding: 4rem 2rem;
+  }
 }
