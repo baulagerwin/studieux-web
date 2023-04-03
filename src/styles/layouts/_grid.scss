@@ -48,4 +48,8 @@
 
 .gap-4 {
   gap: 4rem;
+
+  @include respond(phone-large) {
+    gap: 2rem;
+  }
 }

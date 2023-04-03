@@ -3,10 +3,6 @@
   flex-direction: column;
   gap: 2rem;
   padding: 4rem 0rem;
-
-  &__search {
-    background-color: $loading-color;
-    height: 4rem;
-    border-radius: 0.4rem;
-  }
+  max-width: 114rem;
+  margin: 0 auto;
 }
