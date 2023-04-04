@@ -73,7 +73,7 @@ class Validate {
 
   public notebook(notebook: string): string {
     const schema = Joi.object({
-      notebook: Joi.string().min(2).max(20).required().label("Name"),
+      notebook: Joi.string().min(2).max(22).required().label("Name"),
     });
 
     return (
@@ -85,7 +85,7 @@ class Validate {
 
   public topic(topic: string): string {
     const schema = Joi.object({
-      topic: Joi.string().min(2).max(20).required().label("Name"),
+      topic: Joi.string().min(2).max(22).required().label("Name"),
     });
 
     return (
