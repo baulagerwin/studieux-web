@@ -1,5 +1,5 @@
 import AnimateHeight from "react-animate-height";
-import background from "../../assets/library-girl.png";
+import background from "../../assets/reading-girl.png";
 import Submit from "../common/button/Submit";
 import useAuth from "./hooks/useAuth";
 
