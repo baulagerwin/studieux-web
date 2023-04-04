@@ -1,5 +1,5 @@
 import AnimateHeight from "react-animate-height";
-import background from "../../assets/library-girl.png";
+import bg from "../../assets/library-girl.png";
 import Submit from "../common/button/Submit";
 import useAuth from "./hooks/useAuth";
 
@@ -12,7 +12,7 @@ function SignIn() {
         <div className="signin grid grid-col-2">
           <div
             className="first-col"
-            style={{ backgroundImage: `url(${background})` }}
+            style={{ backgroundImage: `url(${bg})` }}
           ></div>
           <div className="second-col">
             <div className="intro">
