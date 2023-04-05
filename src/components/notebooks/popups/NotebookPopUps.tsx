@@ -85,7 +85,6 @@ function NotebookPopUps({
             onChange={qnaForm.add.onChange}
             onKeyDown={qnaForm.add.onKeyDown}
             onSubmit={qnaForm.add.onSubmit}
-            onMobileSubmit={qnaForm.add.onMobileSubmit}
             isLoading={qnaForm.add.isLoading}
             onCloseQNA={qnaForm.add.close}
           />

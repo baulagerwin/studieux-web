@@ -9,7 +9,6 @@ import PopUp from "../../common/popup/PopUp";
 import TextArea from "../../common/textarea/TextArea";
 import popUpFormKeys from "../../notebooks/popups/popUpKeys";
 import QNAFields from "../types/QNAFields";
-import { Oval } from "react-loader-spinner";
 
 interface Props<T extends { _id: string; name: string }> {
   type: string;
@@ -26,7 +25,6 @@ interface Props<T extends { _id: string; name: string }> {
   ) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
-  onMobileSubmit?: () => void;
   isLoading: boolean;
   onCloseQNA: () => void;
 }
@@ -47,11 +45,11 @@ function QNAForm<T extends { _id: string; name: string }>({
   onChange = (e) => {},
   onKeyDown = (e) => {},
   onSubmit,
-  onMobileSubmit = () => {},
   isLoading,
   onCloseQNA,
 }: Props<T>) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const tabletWidth = 768;
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -72,6 +70,11 @@ function QNAForm<T extends { _id: string; name: string }>({
       document.body.style.overflow = "visible";
     };
   }, []);
+
+  function handleOnKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (windowWidth <= tabletWidth) return;
+    onKeyDown(e);
+  }
 
   return (
     <PopUp onClose={onCloseQNA}>
@@ -113,32 +116,9 @@ function QNAForm<T extends { _id: string; name: string }>({
             name="answer"
             field={fields.answer}
             onChange={onChange}
-            onKeyDown={onKeyDown}
+            onKeyDown={handleOnKeyDown}
           />
-          {windowWidth > 768 ? (
-            <Submit text="Submit" isLoading={isLoading} />
-          ) : (
-            <button
-              type="button"
-              className="btn btn--full grid-span-max"
-              onClick={onMobileSubmit}
-            >
-              {!isLoading ? (
-                "Submit"
-              ) : (
-                <Oval
-                  height={14}
-                  width={14}
-                  color="#fff"
-                  visible={true}
-                  ariaLabel="oval-loading"
-                  secondaryColor="#f4f4f4"
-                  strokeWidth={10}
-                  strokeWidthSecondary={10}
-                />
-              )}
-            </button>
-          )}
+          <Submit text="Submit" isLoading={isLoading} />
         </Form>
       )}
       {type === popUpFormKeys.editQNA && (
@@ -167,7 +147,7 @@ function QNAForm<T extends { _id: string; name: string }>({
             name="answer"
             field={fields.answer}
             onChange={onChange}
-            onKeyDown={onKeyDown}
+            onKeyDown={handleOnKeyDown}
           />
           <Submit text="Update" isLoading={isLoading} />
         </Form>

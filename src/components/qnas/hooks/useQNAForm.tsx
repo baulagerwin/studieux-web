@@ -17,7 +17,6 @@ export interface IQNAForm {
     ) => void;
     onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     onSubmit: (e: React.FormEvent) => void;
-    onMobileSubmit: () => void;
     isLoading: boolean;
     close: () => void;
   };
@@ -53,7 +52,6 @@ function useQNAForm(
     createQNAChange,
     createQNAKeyDown,
     createQNASubmit,
-    createQNAMobileSubmit,
     createQNALoading,
   ] = useCreateQNA(topics, onClosePopUp);
 
@@ -80,7 +78,6 @@ function useQNAForm(
       onChange: createQNAChange,
       onKeyDown: createQNAKeyDown,
       onSubmit: createQNASubmit,
-      onMobileSubmit: createQNAMobileSubmit,
       isLoading: createQNALoading,
       close: createQNAClose,
     },
