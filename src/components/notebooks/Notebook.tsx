@@ -27,6 +27,9 @@ import NotebookLoader from "./loaders/NotebookLoader";
 import validateObjectId from "../../utils/validateObjectId";
 import Mini from "../common/button/Mini";
 import AccordionLoader from "../common/accordion/loader/AccordionLoader";
+import PaginationLoader from "../common/pagination/loader/PaginationLoader";
+import Details from "../common/details/Details";
+import DetailsLoader from "../common/details/loader/DetailsLoader";
 
 function Notebook() {
   const params = useParams();
@@ -234,19 +237,24 @@ function Notebook() {
             </div>
             <hr />
             <div className="notebook__details">
-              <p className="notebook__details--desktop">{`There are ${
-                qna.qnas.count
-              } questions and answer in ${filterBy.toLowerCase()}`}</p>
-              <p className="notebook__details--mobile">{`Questions(${qna.qnas.count})`}</p>
-              <Pagination
-                isXOpen={isPaginationOpen}
-                onXOpen={(value: boolean) => setPaginationOpen(value)}
-                currentPage={Boolean(qna.qnas.results.length) ? page : 0}
-                onCurrentPage={(value: number) => onPageChange(value)}
-                onPrevPage={prevPage}
-                onNextPage={nextPage}
-                pages={pages}
-              />
+              {qna.isFetching ? (
+                <DetailsLoader />
+              ) : (
+                <Details count={qna.qnas.count} filterBy={filterBy} />
+              )}
+              {qna.isFetching ? (
+                <PaginationLoader />
+              ) : (
+                <Pagination
+                  isXOpen={isPaginationOpen}
+                  onXOpen={(value: boolean) => setPaginationOpen(value)}
+                  currentPage={Boolean(qna.qnas.results.length) ? page : 0}
+                  onCurrentPage={(value: number) => onPageChange(value)}
+                  onPrevPage={prevPage}
+                  onNextPage={nextPage}
+                  pages={pages}
+                />
+              )}
             </div>
             {Boolean(!qna.qnas.results.length) && !Boolean(search) && (
               <Empty item="question and answer" />

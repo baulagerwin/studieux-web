@@ -1,0 +1,28 @@
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+
+  @include respond(phone-large) {
+    align-items: center;
+  }
+
+  &--desktop {
+    font-size: 1.6rem;
+    font-weight: 400;
+
+    @include respond(phone-large) {
+      display: none;
+    }
+  }
+
+  &--mobile {
+    font-size: 1.6rem;
+    font-weight: 400;
+    display: none;
+
+    @include respond(phone-large) {
+      display: block;
+    }
+  }
+}
