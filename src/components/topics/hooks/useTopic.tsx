@@ -21,8 +21,9 @@ function useTopic(
     name: "",
   });
 
-  const { data: topics, isLoading: topicsLoading } = useQuery(keys.topics, () =>
-    topicService.get("notebookId=" + notebookId)
+  const { data: topics, isLoading: topicsLoading } = useQuery(
+    [keys.topics, notebookId],
+    () => topicService.get("notebookId=" + notebookId)
   );
 
   function initializer(topic: ITopic) {
