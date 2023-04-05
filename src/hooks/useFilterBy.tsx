@@ -16,6 +16,8 @@ function useFilterBy(
       return;
     }
 
+    searchParams.delete("pageSize");
+    searchParams.delete("page");
     searchParams.set(filterKey, value);
     setSearchParams(searchParams);
   }

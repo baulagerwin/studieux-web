@@ -149,3 +149,11 @@
     margin-right: 2rem;
   }
 }
+
+.u__auth--margin-top {
+  padding-top: 16rem !important;
+
+  @include respond(phone-large) {
+    padding-top: 0rem !important;
+  }
+}

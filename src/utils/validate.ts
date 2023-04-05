@@ -97,7 +97,7 @@ class Validate {
 
   public question(question: string): string {
     const schema = Joi.object({
-      question: Joi.string().min(5).max(70).required().label("Question"),
+      question: Joi.string().min(5).max(60).required().label("Question"),
     });
 
     return (
