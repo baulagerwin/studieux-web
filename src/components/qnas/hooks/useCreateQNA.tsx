@@ -21,6 +21,7 @@ function useCreateQNA(
   (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
   (e: React.KeyboardEvent<HTMLTextAreaElement>) => void,
   (e: React.FormEvent) => void,
+  () => void,
   boolean
 ] {
   const { mutate, isError, isLoading, errorMessage, isSuccess } = useHttp<
@@ -129,6 +130,25 @@ function useCreateQNA(
     serverSideValidation(qna);
   }
 
+  function handleMobileSubmit() {
+    console.log("mobileSubmit");
+    if (topic === initialTopic) return;
+
+    const qna: QNADto = {
+      topicId: findTopicId(topic) || "",
+      question: fields.question.value,
+      answer: fields.answer.value,
+    };
+
+    let clientSideValidationFailed =
+      validate.question(fields.question.value) ||
+      validate.answer(fields.answer.value);
+    if (clientSideValidationFailed)
+      return animateFields(preSubmitFields, clientValidationFields);
+
+    serverSideValidation(qna);
+  }
+
   // When fails
   if (serverSideValidationFailed()) {
     animateFields(preSubmitFields, serverValidationFields);
@@ -176,6 +196,7 @@ function useCreateQNA(
     onChange,
     handleOnKeyDown,
     handleSubmit,
+    handleMobileSubmit,
     isLoading,
   ];
 }

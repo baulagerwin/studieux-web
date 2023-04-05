@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Submit from "../../common/button/Submit";
 import Confirmation from "../../common/confirmation/Confirmation";
 import DropDownMenu from "../../common/dropDownMenu/DropDownMenu";
@@ -9,6 +9,7 @@ import PopUp from "../../common/popup/PopUp";
 import TextArea from "../../common/textarea/TextArea";
 import popUpFormKeys from "../../notebooks/popups/popUpKeys";
 import QNAFields from "../types/QNAFields";
+import { Oval } from "react-loader-spinner";
 
 interface Props<T extends { _id: string; name: string }> {
   type: string;
@@ -25,6 +26,7 @@ interface Props<T extends { _id: string; name: string }> {
   ) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
+  onMobileSubmit?: () => void;
   isLoading: boolean;
   onCloseQNA: () => void;
 }
@@ -45,9 +47,24 @@ function QNAForm<T extends { _id: string; name: string }>({
   onChange = (e) => {},
   onKeyDown = (e) => {},
   onSubmit,
+  onMobileSubmit = () => {},
   isLoading,
   onCloseQNA,
 }: Props<T>) {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  });
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -98,7 +115,30 @@ function QNAForm<T extends { _id: string; name: string }>({
             onChange={onChange}
             onKeyDown={onKeyDown}
           />
-          <Submit text="Submit" isLoading={isLoading} />
+          {windowWidth > 768 ? (
+            <Submit text="Submit" isLoading={isLoading} />
+          ) : (
+            <button
+              type="button"
+              className="btn btn--full grid-span-max"
+              onClick={onMobileSubmit}
+            >
+              {!isLoading ? (
+                "Submit"
+              ) : (
+                <Oval
+                  height={14}
+                  width={14}
+                  color="#fff"
+                  visible={true}
+                  ariaLabel="oval-loading"
+                  secondaryColor="#f4f4f4"
+                  strokeWidth={10}
+                  strokeWidthSecondary={10}
+                />
+              )}
+            </button>
+          )}
         </Form>
       )}
       {type === popUpFormKeys.editQNA && (
