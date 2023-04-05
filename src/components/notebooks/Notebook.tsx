@@ -8,7 +8,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import popUpKeys from "./popups/popUpKeys";
 import NotebookPopUps from "./popups/NotebookPopUps";
 import FilterBy from "../common/filterBy/FilterBy";
@@ -27,9 +27,7 @@ import NotebookLoader from "./loaders/NotebookLoader";
 import validateObjectId from "../../utils/validateObjectId";
 import Mini from "../common/button/Mini";
 import AccordionLoader from "../common/accordion/loader/AccordionLoader";
-import PaginationLoader from "../common/pagination/loader/PaginationLoader";
 import Details from "../common/details/Details";
-import DetailsLoader from "../common/details/loader/DetailsLoader";
 
 function Notebook() {
   const params = useParams();
@@ -237,24 +235,18 @@ function Notebook() {
             </div>
             <hr />
             <div className="notebook__details">
-              {qna.isFetching ? (
-                <DetailsLoader />
-              ) : (
-                <Details count={qna.qnas.count} filterBy={filterBy} />
-              )}
-              {qna.isFetching ? (
-                <PaginationLoader />
-              ) : (
-                <Pagination
-                  isXOpen={isPaginationOpen}
-                  onXOpen={(value: boolean) => setPaginationOpen(value)}
-                  currentPage={Boolean(qna.qnas.results.length) ? page : 0}
-                  onCurrentPage={(value: number) => onPageChange(value)}
-                  onPrevPage={prevPage}
-                  onNextPage={nextPage}
-                  pages={pages}
-                />
-              )}
+              <Details count={qna.qnas.count} filterBy={filterBy} />
+              <Pagination
+                isXOpen={isPaginationOpen}
+                onXOpen={(value: boolean) => setPaginationOpen(value)}
+                currentPage={Boolean(qna.qnas.results.length) ? page : 0}
+                onCurrentPage={(value: number) => {
+                  onPageChange(value);
+                }}
+                onPrevPage={prevPage}
+                onNextPage={nextPage}
+                pages={pages}
+              />
             </div>
             {Boolean(!qna.qnas.results.length) && !Boolean(search) && (
               <Empty item="question and answer" />

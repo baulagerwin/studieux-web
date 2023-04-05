@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import IQNA from "../model/IQNA";
 import ITopic from "../../topics/model/ITopic";
@@ -6,7 +6,6 @@ import keys from "../../../react-query/keys";
 import qnaService from "../../../services/qnaService";
 import useQNAForm, { IQNAForm } from "./useQNAForm";
 import { useSearchParams } from "react-router-dom";
-import queryClient from "../../../react-query/queryClient";
 
 function useQNA(
   notebookId: string,
