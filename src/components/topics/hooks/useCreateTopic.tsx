@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import TopicDto from "../dto/TopicDto";
+import TopicDto from "../../../dtos/TopicDto";
 import useFields from "../../../hooks/useFields";
 import useHttp from "../../../hooks/useHttp";
-import ITopic from "../model/ITopic";
+import ITopic from "../../../models/ITopic";
 import keys from "../../../react-query/keys";
 import topicService from "../../../services/topicService";
 import validate from "../../../utils/validate";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import IQNA from "../../qnas/model/IQNA";
+import IQNA from "../../../models/IQNA";
 
 interface Props {
   qna: IQNA;

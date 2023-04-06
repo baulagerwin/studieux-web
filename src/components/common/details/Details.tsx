@@ -1,5 +1,3 @@
-import IQNA from "../../qnas/model/IQNA";
-
 interface Props {
   count: number;
   filterBy: string;

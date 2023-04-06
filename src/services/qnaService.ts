@@ -1,6 +1,6 @@
 import http from "./httpService";
 import baseURL from "./baseURL";
-import QNADto from "../components/qnas/dto/QNADto";
+import QNADto from "../dtos/QNADto";
 
 export interface QNAPutDto {
   id: string;

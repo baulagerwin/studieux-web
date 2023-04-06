@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserDto from "../dto/UserDto";
+import UserDto from "../../../dtos/UserDto";
 import useFields from "../../../hooks/useFields";
 import useHttp from "../../../hooks/useHttp";
 import authService from "../../../services/authService";
@@ -15,8 +15,10 @@ function useSignUp(): [
   (e: React.FormEvent) => void
 ] {
   const navigate = useNavigate();
-  const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
-    useHttp<UserDto, string>(userService.signUp);
+  const { mutate, data, isLoading, isError, errorMessage, isSuccess } = useHttp<
+    UserDto,
+    string
+  >(userService.signUp);
 
   const initialFields = {
     firstName: {

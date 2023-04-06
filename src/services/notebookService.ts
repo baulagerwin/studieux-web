@@ -1,6 +1,6 @@
 import http from "./httpService";
 import baseURL from "./baseURL";
-import NotebookDto from "../components/notebooks/dto/NotebookDto";
+import NotebookDto from "../dtos/NotebookDto";
 
 export interface NotebookPutDto {
   id: string;

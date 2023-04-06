@@ -43,13 +43,13 @@ function useNotebookForm(
       close: closeUpdateFields,
       onChange: onUpdateNotebookFieldsChange,
       onSubmit: onUpdateNotebookFieldsSubmit,
-      isLoading: isUpdateNotebookFieldsLoading
+      isLoading: isUpdateNotebookFieldsLoading,
     },
     delete: {
       value: notebook.name,
       close: closeDeleteFields,
       onSubmit: onDeleteNotebookSubmit,
-      isLoading: isDeleteNotebookFieldsLoading
+      isLoading: isDeleteNotebookFieldsLoading,
     },
   };
 

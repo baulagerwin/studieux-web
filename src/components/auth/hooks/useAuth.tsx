@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthDto from "../dto/AuthDto";
+import AuthDto from "../../../dtos/AuthDto";
 import useHttp from "../../../hooks/useHttp";
 import authService from "../../../services/authService";
 import AuthFields from "../types/AuthFields";

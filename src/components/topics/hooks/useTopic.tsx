@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import ITopic from "../model/ITopic";
+import ITopic from "../../../models/ITopic";
 import keys from "../../../react-query/keys";
 import topicService from "../../../services/topicService";
 import useTopicForm, { ITopicForm } from "./useTopicForm";

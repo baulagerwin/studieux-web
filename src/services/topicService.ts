@@ -1,6 +1,6 @@
 import http from "./httpService";
 import baseURL from "./baseURL";
-import TopicDto from "../components/topics/dto/TopicDto";
+import TopicDto from "../dtos/TopicDto";
 
 export interface TopicPutDto {
   id: string;

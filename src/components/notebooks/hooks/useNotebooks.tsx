@@ -1,4 +1,4 @@
-import { useIsFetching, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 import keys from "../../../react-query/keys";
 import notebookService from "../../../services/notebookService";

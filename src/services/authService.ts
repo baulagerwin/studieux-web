@@ -1,7 +1,7 @@
 import http, { setJwtInHeader } from "./httpService";
 import jwtDecode from "jwt-decode";
-import AuthDto from "../components/auth/dto/AuthDto";
-import IUser from "../components/user/model/IUser";
+import AuthDto from "../dtos/AuthDto";
+import IUser from "../models/IUser";
 import baseURL from "./baseURL";
 
 let url = "/auth";

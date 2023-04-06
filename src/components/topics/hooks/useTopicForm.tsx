@@ -1,4 +1,4 @@
-import ITopic from "../model/ITopic";
+import ITopic from "../../../models/ITopic";
 import TopicFields from "../types/TopicFields";
 import useCreateTopic from "./useCreateTopic";
 import useDeleteTopic from "./useDeleteTopic";

@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import INotebook from "../model/INotebook";
-import IQNA from "../../qnas/model/IQNA";
-import ITopic from "../../topics/model/ITopic";
+import IQNA from "../../../models/IQNA";
+import ITopic from "../../../models/ITopic";
 import keys from "../../../react-query/keys";
 import notebookService from "../../../services/notebookService";
 import useQNA from "../../qnas/hooks/useQNA";

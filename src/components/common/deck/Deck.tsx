@@ -1,6 +1,6 @@
 import { shuffle } from "lodash";
 import SwipeableCard from "../swipeableCard/SwipeableCard";
-import IQNA from "../../qnas/model/IQNA";
+import IQNA from "../../../models/IQNA";
 import { useEffect, useState } from "react";
 
 interface Props {

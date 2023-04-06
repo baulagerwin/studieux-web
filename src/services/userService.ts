@@ -1,4 +1,4 @@
-import UserDto from "../components/user/dto/UserDto";
+import UserDto from "../dtos/UserDto";
 import http from "./httpService";
 import baseURL from "./baseURL";
 

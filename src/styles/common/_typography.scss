@@ -9,15 +9,10 @@ body {
 h1 {
   font-size: 8rem;
   letter-spacing: 0.4rem;
-  // background: linear-gradient(
-  //   to right,
-  //   $second-color,
-  //   $first-color,
-  //   $third-color
-  // );
-  // -webkit-text-fill-color: transparent;
-  // -webkit-background-clip: text;
-  // color: #4c4e70;
+
+  @include respond(tablet) {
+    font-size: 7rem;
+  }
 
   @include respond(phone-large) {
     font-size: 6rem;

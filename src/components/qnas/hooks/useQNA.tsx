@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import IQNA from "../model/IQNA";
-import ITopic from "../../topics/model/ITopic";
+import IQNA from "../../../models/IQNA";
+import ITopic from "../../../models/ITopic";
 import keys from "../../../react-query/keys";
 import qnaService from "../../../services/qnaService";
 import useQNAForm, { IQNAForm } from "./useQNAForm";

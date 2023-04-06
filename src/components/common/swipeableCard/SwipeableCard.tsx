@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import TinderCard from "react-tinder-card";
-import IQNA from "../../qnas/model/IQNA";
+import IQNA from "../../../models/IQNA";
 
 interface Props {
   qna: IQNA;

@@ -11,7 +11,7 @@ import { useQuery } from "react-query";
 import keys from "../../react-query/keys";
 import reviewService from "../../services/reviewService";
 import { useEffect, useRef, useState } from "react";
-import IQNA from "../qnas/model/IQNA";
+import IQNA from "../../models/IQNA";
 import useSearch from "../../hooks/useSearch";
 import ZeroResults from "../common/zeroResults/ZeroResults";
 import validateObjectId from "../../utils/validateObjectId";

@@ -1,8 +1,8 @@
 function DetailsLoader() {
   return (
-    <div className="u__animation--pulse">
-      <div className="details-loader--desktop"></div>
-      <div className="details-loader--mobile"></div>
+    <div>
+      <div className="details-loader--desktop u__animation--pulse"></div>
+      <div className="details-loader--mobile u__animation--pulse"></div>
     </div>
   );
 }

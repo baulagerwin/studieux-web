@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import IQNA from "../../qnas/model/IQNA";
+import IQNA from "../../../models/IQNA";
 import SlideshowItem from "./SlideshowItem";
 
 interface Props {

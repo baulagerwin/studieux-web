@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import QNADto from "../dto/QNADto";
+import QNADto from "../../../dtos/QNADto";
 import useFields from "../../../hooks/useFields";
 import useHttp from "../../../hooks/useHttp";
-import IQNA from "../model/IQNA";
-import ITopic from "../../topics/model/ITopic";
+import IQNA from "../../../models/IQNA";
+import ITopic from "../../../models/ITopic";
 import keys from "../../../react-query/keys";
 import qnaService from "../../../services/qnaService";
 import validate from "../../../utils/validate";

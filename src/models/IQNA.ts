@@ -1,4 +1,4 @@
-import ITopic from "../../topics/model/ITopic";
+import ITopic from "./ITopic";
 
 export default interface QNA {
   _id: string;

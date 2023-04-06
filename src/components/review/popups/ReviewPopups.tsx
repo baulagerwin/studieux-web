@@ -1,5 +1,5 @@
 import FlippableCard from "../../common/flippableCard/FlippableCard";
-import IQNA from "../../qnas/model/IQNA";
+import IQNA from "../../../models/IQNA";
 import Deck from "../../common/deck/Deck";
 
 interface Props {

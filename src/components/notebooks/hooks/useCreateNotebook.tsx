@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import NotebookDto from "../dto/NotebookDto";
+import NotebookDto from "../../../dtos/NotebookDto";
 import useFields from "../../../hooks/useFields";
 import useHttp from "../../../hooks/useHttp";
 import INotebook from "../model/INotebook";

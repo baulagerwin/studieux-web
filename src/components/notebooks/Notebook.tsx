@@ -8,7 +8,7 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import popUpKeys from "./popups/popUpKeys";
 import NotebookPopUps from "./popups/NotebookPopUps";
 import FilterBy from "../common/filterBy/FilterBy";
@@ -122,7 +122,7 @@ function Notebook() {
                   setSearchParams(searchParams);
                   onSearchChange(e);
                 }}
-                isLoading={false}
+                isLoading={qna.isFetching}
               />
               <Mini
                 icon={
