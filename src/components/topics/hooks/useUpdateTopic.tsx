@@ -11,17 +11,19 @@ import TopicFields from "../types/TopicFields";
 import { useSearchParams } from "react-router-dom";
 import queryClient from "../../../react-query/queryClient";
 
+export interface UpdateTopic {
+  fields: TopicFields;
+  closeFields: () => void;
+  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnSubmit: (e: React.FormEvent) => void;
+  isLoading: boolean;
+}
+
 function useUpdateTopic(
-  id: string,
+  notebookId: string,
   topic: ITopic,
-  onClosePopUp: () => void
-): [
-  TopicFields,
-  () => void,
-  (e: React.ChangeEvent<HTMLInputElement>) => void,
-  (e: React.FormEvent) => void,
-  boolean
-] {
+  onActivePopUp: (value: string) => void
+): UpdateTopic {
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
     useHttp<TopicPutDto, ITopic>(topicService.put, keys.topics);
 
@@ -34,7 +36,7 @@ function useUpdateTopic(
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [performedHttp, setPerformedHttp] = useState(false);
-  const [fields, setFields, animateFields, onChange] =
+  const [fields, setFields, animateFields, handleOnChange] =
     useFields<TopicFields>(initialFields);
 
   useEffect(() => {
@@ -77,11 +79,11 @@ function useUpdateTopic(
   }
 
   // Submit
-  function handleSubmit(e: React.FormEvent) {
+  function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const topicDto: TopicDto = {
-      notebookId: id,
+      notebookId: notebookId,
       name: fields.topic.value,
     };
 
@@ -114,7 +116,7 @@ function useUpdateTopic(
           error: "",
         },
       });
-      onClosePopUp();
+      onActivePopUp("");
     }
     if (isSuccess && searchParams.get("filterBy") === topic.name) {
       searchParams.set("filterBy", fields.topic.value);
@@ -127,7 +129,7 @@ function useUpdateTopic(
           error: "",
         },
       });
-      onClosePopUp();
+      onActivePopUp("");
     }
   }, [isSuccess]);
 
@@ -138,10 +140,10 @@ function useUpdateTopic(
         error: "",
       },
     });
-    onClosePopUp();
+    onActivePopUp("");
   }
 
-  return [fields, closeFields, onChange, handleSubmit, isLoading];
+  return { fields, closeFields, handleOnChange, handleOnSubmit, isLoading };
 }
 
 export default useUpdateTopic;

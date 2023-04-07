@@ -15,8 +15,6 @@ import IQNA from "../../models/IQNA";
 import useSearch from "../../hooks/useSearch";
 import ZeroResults from "../common/zeroResults/ZeroResults";
 import validateObjectId from "../../utils/validateObjectId";
-import PopUp from "../common/popup/PopUp";
-import queryClient from "../../react-query/queryClient";
 import ReviewPopups from "./popups/ReviewPopups";
 
 function Review() {

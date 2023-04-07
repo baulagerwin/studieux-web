@@ -8,18 +8,19 @@ import keys from "../../../react-query/keys";
 import topicService from "../../../services/topicService";
 import validate from "../../../utils/validate";
 import TopicFields from "../types/TopicFields";
-import queryClient from "../../../react-query/queryClient";
+
+export interface CreateTopic {
+  fields: TopicFields;
+  closeFields: () => void;
+  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnSubmit: (e: React.FormEvent) => void;
+  isLoading: boolean;
+}
 
 function useCreateTopic(
-  id: string,
-  onClosePopUp: () => void
-): [
-  TopicFields,
-  () => void,
-  (e: React.ChangeEvent<HTMLInputElement>) => void,
-  (e: React.FormEvent) => void,
-  boolean
-] {
+  notebookId: string,
+  onActivePopUp: (value: string) => void
+): CreateTopic {
   const { mutate, isError, isLoading, errorMessage, isSuccess } = useHttp<
     TopicDto,
     ITopic
@@ -33,7 +34,7 @@ function useCreateTopic(
   };
 
   const [performedHttp, setPerformedHttp] = useState(false);
-  const [fields, setFields, animateFields, onChange] =
+  const [fields, setFields, animateFields, handleOnChange] =
     useFields<TopicFields>(initialTopic);
 
   const preSubmitFields = {
@@ -67,11 +68,11 @@ function useCreateTopic(
   }
 
   // Submit
-  function handleSubmit(e: React.FormEvent) {
+  function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const topic = {
-      notebookId: id,
+      notebookId,
       name: fields.topic.value,
     };
 
@@ -103,10 +104,10 @@ function useCreateTopic(
         error: "",
       },
     });
-    onClosePopUp();
+    onActivePopUp("");
   }
 
-  return [fields, closeFields, onChange, handleSubmit, isLoading];
+  return { fields, closeFields, handleOnChange, handleOnSubmit, isLoading };
 }
 
 export default useCreateTopic;

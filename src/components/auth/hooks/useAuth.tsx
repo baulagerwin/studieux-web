@@ -5,12 +5,12 @@ import useHttp from "../../../hooks/useHttp";
 import authService from "../../../services/authService";
 import AuthFields from "../types/AuthFields";
 
-function useAuth(): [
-  AuthFields,
-  (e: React.ChangeEvent<HTMLInputElement>) => void,
-  boolean,
-  (e: React.FormEvent) => void
-] {
+function useAuth(): {
+  fields: AuthFields;
+  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isLoading: boolean;
+  handleOnSubmit: (e: React.FormEvent) => void;
+} {
   const navigate = useNavigate();
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
     useHttp<AuthDto, string>(authService.signIn);
@@ -40,7 +40,7 @@ function useAuth(): [
   }
 
   // Submit
-  function handleSubmit(e: React.FormEvent) {
+  function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const user = {
@@ -70,7 +70,7 @@ function useAuth(): [
     }
   }, [navigate, isSuccess]);
 
-  return [fields, handleOnChange, isLoading, handleSubmit];
+  return { fields, handleOnChange, isLoading, handleOnSubmit };
 }
 
 export default useAuth;

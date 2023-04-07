@@ -1,14 +1,14 @@
 import blackboard from "../../assets/blackboard.png";
 import Search from "../common/search/Search";
 import Jumbotron from "../common/jumbotron/Jumbotron";
-import useNotebook from "./hooks/useNotebook";
+import useNotebooks from "./hooks/useNotebooks";
 import {
   Navigate,
   useNavigate,
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import popUpKeys from "./popups/popUpKeys";
 import NotebookPopUps from "./popups/NotebookPopUps";
 import FilterBy from "../common/filterBy/FilterBy";
@@ -28,35 +28,32 @@ import validateObjectId from "../../utils/validateObjectId";
 import Mini from "../common/button/Mini";
 import AccordionLoader from "../common/accordion/loader/AccordionLoader";
 import Details from "../common/details/Details";
+import useTopics from "../topics/hooks/useTopics";
+import useQNAS from "../qnas/hooks/useQNAS";
+import useClose from "../qnas/hooks/useClose";
 
 function Notebook() {
-  const params = useParams();
   const navigate = useNavigate();
+  const params = useParams();
+  const notebookId = params.notebookId as string;
 
-  let id = params.notebookId as string;
-
-  if (!validateObjectId(id)) return <Navigate to="*" />;
-
-  const [
-    activePopUp,
-    onActivePopUp,
-    notebook,
-    notebookForm,
-    topic,
-    topicForm,
-    qna,
-    qnaForm,
-  ] = useNotebook(id);
+  if (!validateObjectId(notebookId)) return <Navigate to="*" />;
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, debouncedSearch, onSearchChange] = useSearch("q", "");
   const [filterBy, onFilterBy] = useFilter("filterBy", "All Topics");
   const [sortBy, onSortBy] = useSortBy("sortBy", "A - Z");
-  const [page, onPageChange, pageSize] = usePagination(
-    "page",
-    1,
-    "pageSize",
-    5
+  const pageSize = 5;
+  const [page, onPageChange] = usePagination(pageSize);
+
+  const [activePopUp, setActivePopUp] = useState("");
+  const notebooks = useNotebooks(notebookId, "", setActivePopUp);
+  const topics = useTopics(notebookId, setActivePopUp);
+  const qnas = useQNAS(
+    notebookId,
+    searchParams.toString(),
+    topics.items.data,
+    setActivePopUp
   );
 
   const [isSortByOpen, setSortByOpen] = useState(false);
@@ -64,11 +61,7 @@ function Notebook() {
   const [isMiniMenuOpen, setMiniMenuOpen] = useState(false);
   const [isPaginationOpen, setPaginationOpen] = useState(false);
 
-  useEffect(() => {
-    document.addEventListener("click", closeAll);
-
-    return () => document.removeEventListener("click", closeAll);
-  }, []);
+  useClose(closeAll);
 
   function closeAll() {
     setSortByOpen(false);
@@ -77,10 +70,14 @@ function Notebook() {
     setPaginationOpen(false);
   }
 
-  if (notebook.isLoading || topic.isLoading || qna.isLoading)
+  if (
+    notebooks.items.isLoading ||
+    topics.items.isLoading ||
+    qnas.items.isLoading
+  )
     return <NotebookLoader />;
 
-  const pages = getPages(pageSize, qna.qnas.count);
+  const pages = getPages(pageSize, qnas.items.data.count);
 
   function nextPage() {
     if (page >= pages.length) return;
@@ -99,15 +96,20 @@ function Notebook() {
     <>
       <NotebookPopUps
         activePopUp={activePopUp}
-        notebookForm={notebookForm}
-        topicForm={topicForm}
-        qnaForm={qnaForm}
+        updateNotebook={notebooks.updateNotebook}
+        deleteNotebook={notebooks.deleteNotebook}
+        createTopic={topics.createTopic}
+        updateTopic={topics.updateTopic}
+        deleteTopic={topics.deleteTopic}
+        createQNA={qnas.createQNA}
+        updateQNA={qnas.updateQNA}
+        deleteQNA={qnas.deleteQNA}
       />
       <div className="u__navbar--offset">
         <div className="container">
           <div className="notebook">
             <Jumbotron
-              label={notebook.data.name}
+              label={notebooks.item.data.name}
               x={8}
               y={92}
               imagePath={blackboard}
@@ -122,7 +124,7 @@ function Notebook() {
                   setSearchParams(searchParams);
                   onSearchChange(e);
                 }}
-                isLoading={qna.isFetching}
+                isLoading={qnas.items.isFetching}
               />
               <Mini
                 icon={
@@ -140,7 +142,7 @@ function Notebook() {
                     />
                   </svg>
                 }
-                onOpen={() => onActivePopUp(popUpKeys.editNotebook)}
+                onOpen={() => setActivePopUp(popUpKeys.updateNotebook)}
               />
               <Mini
                 icon={
@@ -158,7 +160,7 @@ function Notebook() {
                     />
                   </svg>
                 }
-                onOpen={() => onActivePopUp(popUpKeys.deleteNotebook)}
+                onOpen={() => setActivePopUp(popUpKeys.deleteNotebook)}
               />
               <FilterBy
                 label={""}
@@ -177,14 +179,14 @@ function Notebook() {
                   _id: "allFilter",
                   name: "All Topics",
                 }}
-                items={topic.topics}
+                items={topics.items.data}
                 onSwipeRight={(item) => {
-                  topic.initializer(item);
-                  onActivePopUp(popUpKeys.editTopic);
+                  topics.initializeTopic(item);
+                  setActivePopUp(popUpKeys.updateTopic);
                 }}
                 onSwipeLeft={(item) => {
-                  topic.initializer(item);
-                  onActivePopUp(popUpKeys.deleteTopic);
+                  topics.initializeTopic(item);
+                  setActivePopUp(popUpKeys.deleteTopic);
                 }}
               />
               <DropDownMenu
@@ -211,7 +213,7 @@ function Notebook() {
                     _id: "addTopic",
                     name: "Add topic",
                     whenClicked: () => {
-                      onActivePopUp(popUpKeys.addTopic);
+                      setActivePopUp(popUpKeys.addTopic);
                       setMiniMenuOpen(false);
                     },
                   },
@@ -219,7 +221,7 @@ function Notebook() {
                     _id: "addQNA",
                     name: "Add Q & A",
                     whenClicked: () => {
-                      onActivePopUp(popUpKeys.addQNA);
+                      setActivePopUp(popUpKeys.addQNA);
                       setMiniMenuOpen(false);
                     },
                   },
@@ -227,7 +229,7 @@ function Notebook() {
                     _id: "review",
                     name: "Review",
                     whenClicked: () => {
-                      navigate(`/review/${id}`);
+                      navigate(`/review/${notebookId}`);
                     },
                   },
                 ]}
@@ -235,11 +237,11 @@ function Notebook() {
             </div>
             <hr />
             <div className="notebook__details">
-              <Details count={qna.qnas.count} filterBy={filterBy} />
+              <Details count={qnas.items.data.count} filterBy={filterBy} />
               <Pagination
                 isXOpen={isPaginationOpen}
                 onXOpen={(value: boolean) => setPaginationOpen(value)}
-                currentPage={Boolean(qna.qnas.results.length) ? page : 0}
+                currentPage={Boolean(qnas.items.data.results.length) ? page : 0}
                 onCurrentPage={(value: number) => {
                   onPageChange(value);
                 }}
@@ -248,26 +250,26 @@ function Notebook() {
                 pages={pages}
               />
             </div>
-            {Boolean(!qna.qnas.results.length) && !Boolean(search) && (
+            {Boolean(!qnas.items.data.results.length) && !Boolean(search) && (
               <Empty item="question and answer" />
             )}
-            {Boolean(qna.qnas.results.length) && !qna.isFetching && (
-              <Accordion
-                items={qna.qnas.results}
-                onSwipeRight={(item) => {
-                  onActivePopUp(popUpKeys.editQNA);
-                  qna.initializer(item);
-                }}
-                onSwipeLeft={(item) => {
-                  onActivePopUp(popUpKeys.deleteQNA);
-                  qna.initializer(item);
-                }}
-              />
-            )}
-            {Boolean(qna.qnas.results.length) && qna.isFetching && (
-              <AccordionLoader />
-            )}
-            {Boolean(!qna.qnas.results.length) && Boolean(search) && (
+            {Boolean(qnas.items.data.results.length) &&
+              !qnas.items.isFetching && (
+                <Accordion
+                  items={qnas.items.data.results}
+                  onSwipeRight={(item) => {
+                    setActivePopUp(popUpKeys.updateQNA);
+                    qnas.initializeQNA(item);
+                  }}
+                  onSwipeLeft={(item) => {
+                    setActivePopUp(popUpKeys.deleteQNA);
+                    qnas.initializeQNA(item);
+                  }}
+                />
+              )}
+            {Boolean(qnas.items.data.results.length) &&
+              qnas.items.isFetching && <AccordionLoader />}
+            {Boolean(!qnas.items.data.results.length) && Boolean(search) && (
               <ZeroResults />
             )}
           </div>

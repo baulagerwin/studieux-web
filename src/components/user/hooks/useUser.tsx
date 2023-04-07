@@ -8,12 +8,12 @@ import userService from "../../../services/userService";
 import validate from "../../../utils/validate";
 import UserFields from "../types/UserFields";
 
-function useSignUp(): [
-  UserFields,
-  (e: React.ChangeEvent<HTMLInputElement>) => void,
-  boolean,
-  (e: React.FormEvent) => void
-] {
+function useSignUp(): {
+  fields: UserFields;
+  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isLoading: boolean;
+  handleOnSubmit: (e: React.FormEvent) => void;
+} {
   const navigate = useNavigate();
   const { mutate, data, isLoading, isError, errorMessage, isSuccess } = useHttp<
     UserDto,
@@ -44,7 +44,7 @@ function useSignUp(): [
   };
 
   const [performedHttp, setPerformedHttp] = useState(false);
-  const [fields, setFields, animateFields, onChange] =
+  const [fields, setFields, animateFields, handleOnChange] =
     useFields<UserFields>(initialFields);
 
   let preSubmitFields = {
@@ -136,7 +136,7 @@ function useSignUp(): [
   }
 
   // Submit
-  function handleSubmit(e: React.FormEvent) {
+  function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const user = {
@@ -168,7 +168,7 @@ function useSignUp(): [
     }
   }, [navigate, isSuccess]);
 
-  return [fields, onChange, isLoading, handleSubmit];
+  return { fields, handleOnChange, isLoading, handleOnSubmit };
 }
 
 export default useSignUp;

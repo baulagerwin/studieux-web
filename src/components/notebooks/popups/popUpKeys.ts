@@ -1,12 +1,12 @@
 const popUpFormKeys = {
   addNotebook: "addNotebook",
-  editNotebook: "editNotebook",
+  updateNotebook: "updateNotebook",
   deleteNotebook: "deleteNotebook",
   addTopic: "addTopic",
-  editTopic: "editTopic",
+  updateTopic: "updateTopic",
   deleteTopic: "deleteTopic",
   addQNA: "addQNA",
-  editQNA: "editQNA",
+  updateQNA: "updateQNA",
   deleteQNA: "deleteQNA",
 };
 

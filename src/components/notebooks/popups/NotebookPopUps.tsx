@@ -1,98 +1,112 @@
 import FormHeader from "../../common/formHeader/FormHeader";
 import PopUp from "../../common/popup/PopUp";
 import QNAForm from "../../qnas/form/QNAForm";
-import { IQNAForm } from "../../qnas/hooks/useQNAForm";
+import { CreateQNA } from "../../qnas/hooks/useCreateQNA";
+import { DeleteQNA } from "../../qnas/hooks/useDeleteQNA";
+import { UpdateQNA } from "../../qnas/hooks/useUpdateQNA";
 import TopicForm from "../../topics/form/TopicForm";
-import { ITopicForm } from "../../topics/hooks/useTopicForm";
+import { CreateTopic } from "../../topics/hooks/useCreateTopic";
+import { DeleteTopic } from "../../topics/hooks/useDeleteTopic";
+import { UpdateTopic } from "../../topics/hooks/useUpdateTopic";
 import NotebookForm from "../form/NotebookForm";
-import { INotebookForm } from "../hooks/useNotebookForm";
+import { DeleteNotebook } from "../hooks/useDeleteNotebook";
+import { UpdateNotebook } from "../hooks/useUpdateNotebook";
 import popUpKeys from "./popUpKeys";
 
 interface Props {
   activePopUp: string;
-  notebookForm: INotebookForm;
-  topicForm: ITopicForm;
-  qnaForm: IQNAForm;
+  updateNotebook: UpdateNotebook;
+  deleteNotebook: DeleteNotebook;
+  createTopic: CreateTopic;
+  updateTopic: UpdateTopic;
+  deleteTopic: DeleteTopic;
+  createQNA: CreateQNA;
+  updateQNA: UpdateQNA;
+  deleteQNA: DeleteQNA;
 }
 
 function NotebookPopUps({
   activePopUp,
-  notebookForm,
-  topicForm,
-  qnaForm,
+  updateNotebook,
+  deleteNotebook,
+  createTopic,
+  updateTopic,
+  deleteTopic,
+  createQNA,
+  updateQNA,
+  deleteQNA,
 }: Props) {
   return (
     <>
-      {activePopUp === popUpKeys.editNotebook && (
+      {activePopUp === popUpKeys.updateNotebook && (
         <NotebookForm
-          type={popUpKeys.editNotebook}
-          fields={notebookForm.update.fields}
-          onChange={notebookForm.update.onChange}
-          onSubmit={notebookForm.update.onSubmit}
-          onCloseNotebook={notebookForm.update.close}
-          isLoading={notebookForm.update.isLoading}
+          type={popUpKeys.updateNotebook}
+          fields={updateNotebook.fields}
+          onChange={updateNotebook.handleOnChange}
+          onSubmit={updateNotebook.handleOnSubmit}
+          onCloseNotebook={updateNotebook.closeFields}
+          isLoading={updateNotebook.isLoading}
         />
       )}
       {activePopUp === popUpKeys.deleteNotebook && (
         <NotebookForm
           type={popUpKeys.deleteNotebook}
-          value={notebookForm.delete.value}
-          onSubmit={notebookForm.delete.onSubmit}
-          onCloseNotebook={notebookForm.delete.close}
-          isLoading={notebookForm.delete.isLoading}
+          value={deleteNotebook.notebook.name}
+          onSubmit={deleteNotebook.handleOnSubmit}
+          onCloseNotebook={deleteNotebook.closeFields}
+          isLoading={deleteNotebook.isLoading}
         />
       )}
       {activePopUp === popUpKeys.addTopic && (
         <TopicForm
           type={popUpKeys.addTopic}
-          fields={topicForm.add.fields}
-          onChange={topicForm.add.onChange}
-          onSubmit={topicForm.add.onSubmit}
-          isLoading={topicForm.add.isLoading}
-          onCloseTopic={topicForm.add.close}
+          fields={createTopic.fields}
+          onChange={createTopic.handleOnChange}
+          onSubmit={createTopic.handleOnSubmit}
+          isLoading={createTopic.isLoading}
+          onCloseTopic={createTopic.closeFields}
         />
       )}
-      {activePopUp === popUpKeys.editTopic && (
+      {activePopUp === popUpKeys.updateTopic && (
         <TopicForm
-          type={popUpKeys.editTopic}
-          fields={topicForm.update.fields}
-          onChange={topicForm.update.onChange}
-          onSubmit={topicForm.update.onSubmit}
-          isLoading={topicForm.update.isLoading}
-          onCloseTopic={topicForm.update.close}
+          type={popUpKeys.updateTopic}
+          fields={updateTopic.fields}
+          onChange={updateTopic.handleOnChange}
+          onSubmit={updateTopic.handleOnSubmit}
+          isLoading={updateTopic.isLoading}
+          onCloseTopic={updateTopic.closeFields}
         />
       )}
       {activePopUp === popUpKeys.deleteTopic && (
         <TopicForm
           type={popUpKeys.deleteTopic}
-          value={topicForm.delete.value}
-          onSubmit={topicForm.delete.onSubmit}
-          isLoading={topicForm.delete.isLoading}
-          onCloseTopic={topicForm.delete.close}
+          value={deleteTopic.topic.name}
+          onSubmit={deleteTopic.handleOnSubmit}
+          isLoading={deleteTopic.isLoading}
+          onCloseTopic={deleteTopic.closeFields}
+        />
+      )}
+      {activePopUp === popUpKeys.addQNA && Boolean(createQNA.topics.length) && (
+        <QNAForm
+          type={popUpKeys.addQNA}
+          xBy={createQNA.dropDown.topic}
+          onXBy={createQNA.dropDown.onTopic}
+          isXOpen={createQNA.dropDown.isTopicOpen}
+          onXOpen={createQNA.dropDown.onTopicOpen}
+          items={createQNA.topics}
+          limitLength={4}
+          fields={createQNA.fields}
+          onChange={createQNA.handleOnChange}
+          onKeyDown={createQNA.handleOnKeyDown}
+          onSubmit={createQNA.handleOnSubmit}
+          isLoading={createQNA.isLoading}
+          onCloseQNA={createQNA.closeFields}
         />
       )}
       {activePopUp === popUpKeys.addQNA &&
-        Boolean(qnaForm.add.topics.length) && (
-          <QNAForm
-            type={popUpKeys.addQNA}
-            xBy={qnaForm.add.dropDown.topic}
-            onXBy={qnaForm.add.dropDown.onTopic}
-            isXOpen={qnaForm.add.dropDown.isTopicOpen}
-            onXOpen={qnaForm.add.dropDown.onTopicOpen}
-            items={qnaForm.add.topics}
-            limitLength={4}
-            fields={qnaForm.add.fields}
-            onChange={qnaForm.add.onChange}
-            onKeyDown={qnaForm.add.onKeyDown}
-            onSubmit={qnaForm.add.onSubmit}
-            isLoading={qnaForm.add.isLoading}
-            onCloseQNA={qnaForm.add.close}
-          />
-        )}
-      {activePopUp === popUpKeys.addQNA &&
-        Boolean(!qnaForm.add.topics.length) && (
-          <PopUp onClose={qnaForm.add.close}>
-            <FormHeader label="Empty topic" onClose={qnaForm.add.close} />
+        Boolean(!createQNA.topics.length) && (
+          <PopUp onClose={createQNA.closeFields}>
+            <FormHeader label="Empty topic" onClose={createQNA.closeFields} />
             <hr />
             <p className="u__toast--container u__text--center">
               In order to create a question and answer, you have to create a
@@ -101,36 +115,36 @@ function NotebookPopUps({
             <button
               type="button"
               className="btn btn--full"
-              onClick={qnaForm.add.close}
+              onClick={createQNA.closeFields}
             >
               Got it
             </button>
           </PopUp>
         )}
-      {activePopUp === popUpKeys.editQNA && (
+      {activePopUp === popUpKeys.updateQNA && (
         <QNAForm
-          type={popUpKeys.editQNA}
-          xBy={qnaForm.update.dropDown.topic}
-          onXBy={qnaForm.update.dropDown.onTopic}
-          isXOpen={qnaForm.update.dropDown.isTopicOpen}
-          onXOpen={qnaForm.update.dropDown.onTopicOpen}
-          items={qnaForm.update.topics}
+          type={popUpKeys.updateQNA}
+          xBy={updateQNA.dropDown.topic}
+          onXBy={updateQNA.dropDown.onTopic}
+          isXOpen={updateQNA.dropDown.isTopicOpen}
+          onXOpen={updateQNA.dropDown.onTopicOpen}
+          items={updateQNA.topics}
           limitLength={4}
-          fields={qnaForm.update.fields}
-          onChange={qnaForm.update.onChange}
-          onKeyDown={qnaForm.update.onKeyDown}
-          onSubmit={qnaForm.update.onSubmit}
-          isLoading={qnaForm.update.isLoading}
-          onCloseQNA={qnaForm.update.close}
+          fields={updateQNA.fields}
+          onChange={updateQNA.handleOnChange}
+          onKeyDown={updateQNA.handleOnKeyDown}
+          onSubmit={updateQNA.handleOnSubmit}
+          isLoading={updateQNA.isLoading}
+          onCloseQNA={updateQNA.closeFields}
         />
       )}
       {activePopUp === popUpKeys.deleteQNA && (
         <QNAForm
           type={popUpKeys.deleteQNA}
-          value={qnaForm.delete.value}
-          onSubmit={qnaForm.delete.onSubmit}
-          isLoading={qnaForm.delete.isLoading}
-          onCloseQNA={qnaForm.delete.close}
+          value={deleteQNA.qna.question}
+          onSubmit={deleteQNA.handleOnSubmit}
+          isLoading={deleteQNA.isLoading}
+          onCloseQNA={deleteQNA.closeFields}
         />
       )}
     </>

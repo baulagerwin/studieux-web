@@ -4,7 +4,7 @@ import Submit from "../common/button/Submit";
 import useAuth from "./hooks/useAuth";
 
 function SignIn() {
-  const [fields, onChange, isLoading, onSubmit] = useAuth();
+  const auth = useAuth();
 
   return (
     <div className="container u__auth--margin-top">
@@ -23,13 +23,13 @@ function SignIn() {
               <span className="u__third--color">.</span>
             </div>
           </div>
-          <form className="form" onSubmit={onSubmit}>
+          <form className="form" onSubmit={auth.handleOnSubmit}>
             <AnimateHeight
               duration={300}
-              height={!Boolean(fields.error) ? 0 : "auto"}
+              height={!Boolean(auth.fields.error) ? 0 : "auto"}
               className="form__error u__text-error--color"
             >
-              {fields.error}
+              {auth.fields.error}
             </AnimateHeight>
             <label className="form__label">
               Username
@@ -38,8 +38,8 @@ function SignIn() {
                 autoComplete="off"
                 placeholder="Username"
                 name="username"
-                value={fields.username}
-                onChange={onChange}
+                value={auth.fields.username}
+                onChange={auth.handleOnChange}
               />
             </label>
             <label className="form__label">
@@ -49,11 +49,11 @@ function SignIn() {
                 autoComplete="off"
                 placeholder="Password"
                 name="password"
-                value={fields.password}
-                onChange={onChange}
+                value={auth.fields.password}
+                onChange={auth.handleOnChange}
               />
             </label>
-            <Submit text="Log In" isLoading={isLoading} />
+            <Submit text="Log In" isLoading={auth.isLoading} />
           </form>
         </div>
       </div>

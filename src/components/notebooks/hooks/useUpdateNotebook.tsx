@@ -11,16 +11,18 @@ import notebookService, {
 import validate from "../../../utils/validate";
 import NotebookFields from "../types/NotebookFields";
 
+export interface UpdateNotebook {
+  fields: NotebookFields;
+  closeFields: () => void;
+  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnSubmit: (e: React.FormEvent) => void;
+  isLoading: boolean;
+}
+
 function useUpdateNotebook(
   notebook: INotebook,
-  onClosePopUp: () => void
-): [
-  NotebookFields,
-  () => void,
-  (e: React.ChangeEvent<HTMLInputElement>) => void,
-  (e: React.FormEvent) => void,
-  boolean
-] {
+  onActivePopUp: (value: string) => void
+): UpdateNotebook {
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
     useHttp<NotebookPutDto, INotebook>(notebookService.put, keys.notebook);
 
@@ -32,7 +34,7 @@ function useUpdateNotebook(
   };
 
   const [performedHttp, setPerformedHttp] = useState(false);
-  const [fields, setFields, animateFields, onChange] =
+  const [fields, setFields, animateFields, handleOnChange] =
     useFields<NotebookFields>(initialFields);
 
   const preSubmitFields = {
@@ -75,7 +77,7 @@ function useUpdateNotebook(
   }
 
   // Submit
-  function handleSubmit(e: React.FormEvent) {
+  function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const notebookDto: NotebookDto = {
@@ -110,7 +112,7 @@ function useUpdateNotebook(
           error: "",
         },
       });
-      onClosePopUp();
+      onActivePopUp("");
     }
   }, [isSuccess]);
 
@@ -121,10 +123,10 @@ function useUpdateNotebook(
         error: "",
       },
     });
-    onClosePopUp();
+    onActivePopUp("");
   }
 
-  return [fields, closeFields, onChange, handleSubmit, isLoading];
+  return { fields, closeFields, handleOnChange, handleOnSubmit, isLoading };
 }
 
 export default useUpdateNotebook;

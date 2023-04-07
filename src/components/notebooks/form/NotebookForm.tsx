@@ -27,20 +27,12 @@ function NotebookForm({
   isLoading,
   onCloseNotebook,
 }: Props) {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "visible";
-    };
-  }, []);
-
   return (
     <PopUp onClose={onCloseNotebook}>
       {type === popUpFormKeys.addNotebook && (
         <FormHeader label="Create notebook" onClose={onCloseNotebook} />
       )}
-      {type === popUpFormKeys.editNotebook && (
+      {type === popUpFormKeys.updateNotebook && (
         <FormHeader label="Edit notebook" onClose={onCloseNotebook} />
       )}
       {type === popUpFormKeys.deleteNotebook && (
@@ -62,7 +54,7 @@ function NotebookForm({
           <Submit text="Submit" isLoading={isLoading} />
         </Form>
       )}
-      {type === popUpFormKeys.editNotebook && (
+      {type === popUpFormKeys.updateNotebook && (
         <Form onSubmit={onSubmit}>
           <Input
             label="Name"

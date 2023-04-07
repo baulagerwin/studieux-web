@@ -63,14 +63,6 @@ function QNAForm<T extends { _id: string; name: string }>({
     };
   });
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "visible";
-    };
-  }, []);
-
   function handleOnKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (windowWidth <= tabletWidth) return;
     onKeyDown(e);
@@ -81,7 +73,7 @@ function QNAForm<T extends { _id: string; name: string }>({
       {type === popUpFormKeys.addQNA && (
         <FormHeader label="Create Q & A" onClose={onCloseQNA} />
       )}
-      {type === popUpFormKeys.editQNA && (
+      {type === popUpFormKeys.updateQNA && (
         <FormHeader label="Edit Q & A" onClose={onCloseQNA} />
       )}
       {type === popUpFormKeys.deleteQNA && (
@@ -121,7 +113,7 @@ function QNAForm<T extends { _id: string; name: string }>({
           <Submit text="Submit" isLoading={isLoading} />
         </Form>
       )}
-      {type === popUpFormKeys.editQNA && (
+      {type === popUpFormKeys.updateQNA && (
         <Form onSubmit={onSubmit}>
           <DropDownMenu
             label={""}

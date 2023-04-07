@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import QNADto from "../../../dtos/QNADto";
 import useFields from "../../../hooks/useFields";
 import useHttp from "../../../hooks/useHttp";
 import IQNA from "../../../models/IQNA";
@@ -11,19 +10,24 @@ import validate from "../../../utils/validate";
 import QNADropDown from "../types/QNADropDown";
 import QNAFields from "../types/QNAFields";
 
+export interface UpdateQNA {
+  topics: ITopic[];
+  dropDown: QNADropDown;
+  fields: QNAFields;
+  closeFields: () => void;
+  handleOnChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleOnKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  handleOnSubmit: (e: React.FormEvent) => void;
+  isLoading: boolean;
+}
+
 function useUpdateQNA(
   qna: IQNA,
   topics: ITopic[],
-  onClosePopUp: () => void
-): [
-  QNADropDown,
-  QNAFields,
-  () => void,
-  (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
-  (e: React.KeyboardEvent<HTMLTextAreaElement>) => void,
-  (e: React.FormEvent) => void,
-  boolean
-] {
+  onActivePopUp: (value: string) => void
+): UpdateQNA {
   const { mutate, isError, isLoading, errorMessage, isSuccess } = useHttp<
     QNAPutDto,
     IQNA
@@ -43,7 +47,7 @@ function useUpdateQNA(
   const [topic, setTopic] = useState(initialTopic);
   const [isTopicOpen, setTopicOpen] = useState(false);
   const [performedHttp, setPerformedHttp] = useState(false);
-  const [fields, setFields, animateFields, onChange] =
+  const [fields, setFields, animateFields, handleOnChange] =
     useFields<QNAFields>(initialQNA);
 
   useEffect(() => {
@@ -93,7 +97,7 @@ function useUpdateQNA(
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       e.currentTarget.blur();
-      handleSubmit(e);
+      handleOnSubmit(e);
     }
   }
 
@@ -113,7 +117,7 @@ function useUpdateQNA(
   }
 
   // Submit
-  function handleSubmit(e: React.FormEvent) {
+  function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (topic === initialTopic) return;
@@ -156,7 +160,7 @@ function useUpdateQNA(
           error: "",
         },
       });
-      onClosePopUp();
+      onActivePopUp("");
     }
   }, [isSuccess]);
 
@@ -173,18 +177,19 @@ function useUpdateQNA(
         error: "",
       },
     });
-    onClosePopUp();
+    onActivePopUp("");
   }
 
-  return [
+  return {
+    topics,
     dropDown,
     fields,
     closeFields,
-    onChange,
+    handleOnChange,
     handleOnKeyDown,
-    handleSubmit,
+    handleOnSubmit,
     isLoading,
-  ];
+  };
 }
 
 export default useUpdateQNA;

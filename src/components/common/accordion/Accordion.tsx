@@ -1,14 +1,13 @@
+import IQNA from "../../../models/IQNA";
 import AccordionItem from "./AccordionItem";
 
-interface Props<T extends { _id: string; question: string; answer: string }> {
-  items: T[];
-  onSwipeRight: (value: T) => void;
-  onSwipeLeft: (value: T) => void;
+interface Props {
+  items: IQNA[];
+  onSwipeRight: (value: IQNA) => void;
+  onSwipeLeft: (value: IQNA) => void;
 }
 
-function Accordion<
-  T extends { _id: string; question: string; answer: string }
->({ items, onSwipeRight, onSwipeLeft }: Props<T>) {
+function Accordion({ items, onSwipeRight, onSwipeLeft }: Props) {
   return (
     <ul className={`accordion u__accordion-margin-bottom--${items.length}`}>
       {items.map((item) => {

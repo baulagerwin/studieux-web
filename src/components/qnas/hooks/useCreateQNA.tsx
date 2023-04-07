@@ -11,18 +11,23 @@ import validate from "../../../utils/validate";
 import QNADropDown from "../types/QNADropDown";
 import QNAFields from "../types/QNAFields";
 
+export interface CreateQNA {
+  topics: ITopic[];
+  dropDown: QNADropDown;
+  fields: QNAFields;
+  closeFields: () => void;
+  handleOnChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleOnKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  handleOnSubmit: (e: React.FormEvent) => void;
+  isLoading: boolean;
+}
+
 function useCreateQNA(
   topics: ITopic[],
-  onClosePopUp: () => void
-): [
-  QNADropDown,
-  QNAFields,
-  () => void,
-  (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
-  (e: React.KeyboardEvent<HTMLTextAreaElement>) => void,
-  (e: React.FormEvent) => void,
-  boolean
-] {
+  onActivePopUp: (value: string) => void
+): CreateQNA {
   const { mutate, isError, isLoading, errorMessage, isSuccess } = useHttp<
     QNADto,
     IQNA
@@ -42,7 +47,7 @@ function useCreateQNA(
   const [topic, setTopic] = useState(initialTopic);
   const [isTopicOpen, setTopicOpen] = useState(false);
   const [performedHttp, setPerformedHttp] = useState(false);
-  const [fields, setFields, animateFields, onChange] =
+  const [fields, setFields, animateFields, handleOnChange] =
     useFields<QNAFields>(initialQNA);
 
   const dropDown: QNADropDown = {
@@ -89,7 +94,7 @@ function useCreateQNA(
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       e.currentTarget.blur();
-      handleSubmit(e);
+      handleOnSubmit(e);
     }
   }
 
@@ -109,7 +114,7 @@ function useCreateQNA(
   }
 
   // Submit
-  function handleSubmit(e: React.FormEvent) {
+  function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     if (topic === initialTopic) return;
@@ -166,18 +171,19 @@ function useCreateQNA(
         error: "",
       },
     });
-    onClosePopUp();
+    onActivePopUp("");
   }
 
-  return [
+  return {
+    topics,
     dropDown,
     fields,
     closeFields,
-    onChange,
+    handleOnChange,
     handleOnKeyDown,
-    handleSubmit,
+    handleOnSubmit,
     isLoading,
-  ];
+  };
 }
 
 export default useCreateQNA;

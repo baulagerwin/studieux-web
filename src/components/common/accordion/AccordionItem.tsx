@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import AnimateHeight from "react-animate-height";
+import ITopic from "../../../models/ITopic";
 
-interface Props<T extends { _id: string; question: string; answer: string }> {
+interface Props<
+  T extends { _id: string; topic: ITopic; question: string; answer: string }
+> {
   item: T;
   items: T[];
   onSwipeRight: (item: T) => void;
@@ -9,7 +12,7 @@ interface Props<T extends { _id: string; question: string; answer: string }> {
 }
 
 function AccordionItem<
-  T extends { _id: string; question: string; answer: string }
+  T extends { _id: string; topic: ITopic; question: string; answer: string }
 >({ item, items, onSwipeRight, onSwipeLeft }: Props<T>) {
   const itemRef = useRef<HTMLLIElement>(null);
   const sideButtonRef = useRef<HTMLDivElement>(null);
@@ -102,8 +105,10 @@ function AccordionItem<
     if (!sideButtonRef.current) return;
     let sideButtonWidth = sideButtonRef.current.offsetWidth;
 
-    if (isSwiped && positionDiff >= sideButtonWidth && !isOpen) onSwipeRight(item);
-    if (isSwiped && positionDiff <= -sideButtonWidth && !isOpen) onSwipeLeft(item);
+    if (isSwiped && positionDiff >= sideButtonWidth && !isOpen)
+      onSwipeRight(item);
+    if (isSwiped && positionDiff <= -sideButtonWidth && !isOpen)
+      onSwipeLeft(item);
 
     setIsDown(false);
     setIsSwiped(false);

@@ -3,32 +3,40 @@ import { toast } from "react-toastify";
 import useHttp from "../../../hooks/useHttp";
 import keys from "../../../react-query/keys";
 import qnaService from "../../../services/qnaService";
+import IQNA from "../../../models/IQNA";
+
+export interface DeleteQNA {
+  qna: IQNA;
+  closeFields: () => void;
+  handleOnSubmit: (e: React.FormEvent) => void;
+  isLoading: boolean;
+}
 
 function useDeleteQNA(
-  qnaId: string,
-  onClosePopUp: () => void
-): [() => void, (e: React.FormEvent) => void, boolean] {
+  qna: IQNA,
+  onActivePopUp: (value: string) => void
+): DeleteQNA {
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
     useHttp(qnaService.delete, keys.qnas);
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    mutate(qnaId);
+    mutate(qna._id);
   }
 
   useEffect(() => {
     if (isSuccess) {
       toast.success(`Question and answer has been successfully deleted.`);
-      close();
+      closeFields();
     }
   }, [isSuccess]);
 
-  function close() {
-    onClosePopUp();
+  function closeFields() {
+    onActivePopUp("");
   }
 
-  return [close, handleSubmit, isLoading];
+  return { qna, closeFields, handleOnSubmit, isLoading };
 }
 
 export default useDeleteQNA;

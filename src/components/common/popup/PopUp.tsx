@@ -1,9 +1,19 @@
+import { useEffect } from "react";
+
 interface Props {
   children: React.ReactNode;
   onClose: () => void;
 }
 
 function PopUp({ children, onClose }: Props) {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "visible";
+    };
+  }, []);
+
   return (
     <div
       className="popup"

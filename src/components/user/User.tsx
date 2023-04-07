@@ -5,7 +5,7 @@ import Input from "../common/input/Input";
 import useUser from "./hooks/useUser";
 
 function User() {
-  const [fields, onChange, isLoading, onSubmit] = useUser();
+  const user = useUser();
 
   return (
     <div className="u__navbar--offset">
@@ -28,30 +28,33 @@ function User() {
                 <span>.</span>
               </div>
             </div>
-            <form onSubmit={onSubmit} className="grid grid-col-2 gap-1">
+            <form
+              onSubmit={user.handleOnSubmit}
+              className="grid grid-col-2 gap-1"
+            >
               <Input
                 label="First name"
                 placeholder="John"
                 autoFocus={false}
                 name="firstName"
-                field={fields.firstName}
-                onChange={onChange}
+                field={user.fields.firstName}
+                onChange={user.handleOnChange}
               />
               <Input
                 label="Last name"
                 placeholder="Doe"
                 autoFocus={false}
                 name="lastName"
-                field={fields.lastName}
-                onChange={onChange}
+                field={user.fields.lastName}
+                onChange={user.handleOnChange}
               />
               <Input
                 label="Username"
                 placeholder="johndoe"
                 autoFocus={false}
                 name="username"
-                field={fields.username}
-                onChange={onChange}
+                field={user.fields.username}
+                onChange={user.handleOnChange}
                 max={true}
               />
               <Input
@@ -59,8 +62,8 @@ function User() {
                 placeholder="johndoe@gmail.com"
                 autoFocus={false}
                 name="email"
-                field={fields.email}
-                onChange={onChange}
+                field={user.fields.email}
+                onChange={user.handleOnChange}
                 max={true}
               />
               <Input
@@ -69,11 +72,11 @@ function User() {
                 placeholder="johndoe_password"
                 autoFocus={false}
                 name="password"
-                field={fields.password}
-                onChange={onChange}
+                field={user.fields.password}
+                onChange={user.handleOnChange}
                 max={true}
               />
-              <Submit text="Create account" isLoading={isLoading} />
+              <Submit text="Create account" isLoading={user.isLoading} />
             </form>
           </div>
         </div>

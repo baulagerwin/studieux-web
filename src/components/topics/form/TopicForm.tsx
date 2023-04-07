@@ -27,20 +27,12 @@ function TopicForm({
   isLoading,
   onCloseTopic,
 }: Props) {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "visible";
-    };
-  }, []);
-
   return (
     <PopUp onClose={onCloseTopic}>
       {type === popUpFormKeys.addTopic && (
         <FormHeader label="Create topic" onClose={onCloseTopic} />
       )}
-      {type === popUpFormKeys.editTopic && (
+      {type === popUpFormKeys.updateTopic && (
         <FormHeader label="Edit topic" onClose={onCloseTopic} />
       )}
       {type === popUpFormKeys.deleteTopic && (
@@ -62,7 +54,7 @@ function TopicForm({
           <Submit text="Submit" isLoading={isLoading} />
         </Form>
       )}
-      {type === popUpFormKeys.editTopic && (
+      {type === popUpFormKeys.updateTopic && (
         <Form onSubmit={onSubmit}>
           <Input
             label="Name"

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useHttp from "../../../hooks/useHttp";
@@ -6,15 +6,22 @@ import INotebook from "../model/INotebook";
 import keys from "../../../react-query/keys";
 import notebookService from "../../../services/notebookService";
 
+export interface DeleteNotebook {
+  notebook: INotebook;
+  closeFields: () => void;
+  handleOnSubmit: (e: React.FormEvent) => void;
+  isLoading: boolean;
+}
+
 function useDeleteNotebook(
   notebook: INotebook,
-  onClosePopUp: () => void
-): [() => void, (e: React.FormEvent) => void, boolean] {
+  onActivePopUp: (value: string) => void
+) {
   const navigate = useNavigate();
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
-    useHttp(notebookService.delete, keys.notebook);
+    useHttp(notebookService.delete, keys.notebooks);
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     mutate(notebook._id);
@@ -27,11 +34,11 @@ function useDeleteNotebook(
     }
   }, [isSuccess]);
 
-  function close() {
-    onClosePopUp();
+  function closeFields() {
+    onActivePopUp("");
   }
 
-  return [close, handleSubmit, isLoading];
+  return { notebook, closeFields, handleOnSubmit, isLoading };
 }
 
 export default useDeleteNotebook;

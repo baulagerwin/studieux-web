@@ -1,32 +1,26 @@
 import { useSearchParams } from "react-router-dom";
 
-function usePagination(
-  key: string,
-  initialPage: number,
-  pageSizeKey: string,
-  initialPageSize: number
-): [number, (value: number) => void, number] {
+function usePagination(pageSize: number): [number, (value: number) => void] {
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const pageKey = key;
-
-  const pageSize = Number(searchParams.get(pageSizeKey)) || initialPageSize;
-  const page = Number(searchParams.get(pageKey)) || initialPage;
+  const initialPage = 1;
+  const key = "page";
+  const page = Number(searchParams.get(key)) || initialPage;
+  const pagegSizeKey = "pageSize";
 
   function handlePageChange(value: number) {
     if (value === initialPage) {
-      searchParams.delete(pageKey);
-      searchParams.delete(pageSizeKey);
+      searchParams.delete(pagegSizeKey);
+      searchParams.delete(key);
       setSearchParams(searchParams);
       return;
     }
 
-    searchParams.set(pageSizeKey, pageSize.toString());
-    searchParams.set(pageKey, value.toString());
+    searchParams.set(pagegSizeKey, pageSize.toString());
+    searchParams.set(key, value.toString());
     setSearchParams(searchParams);
   }
 
-  return [page, handlePageChange, pageSize];
+  return [page, handlePageChange];
 }
 
 export default usePagination;
