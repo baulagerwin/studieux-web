@@ -169,8 +169,6 @@ function Notebook() {
                 onXOpen={setFilterByOpen}
                 xBy={filterBy}
                 onXBy={(value: string) => {
-                  searchParams.delete("pageSizeKey");
-                  searchParams.delete("page");
                   setSearchParams(searchParams);
                   onFilterBy(value);
                 }}

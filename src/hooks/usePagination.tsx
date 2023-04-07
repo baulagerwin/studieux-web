@@ -5,17 +5,17 @@ function usePagination(pageSize: number): [number, (value: number) => void] {
   const initialPage = 1;
   const key = "page";
   const page = Number(searchParams.get(key)) || initialPage;
-  const pagegSizeKey = "pageSize";
+  const pageSizeKey = "pageSize";
 
   function handlePageChange(value: number) {
     if (value === initialPage) {
-      searchParams.delete(pagegSizeKey);
+      searchParams.delete(pageSizeKey);
       searchParams.delete(key);
       setSearchParams(searchParams);
       return;
     }
 
-    searchParams.set(pagegSizeKey, pageSize.toString());
+    searchParams.set(pageSizeKey, pageSize.toString());
     searchParams.set(key, value.toString());
     setSearchParams(searchParams);
   }
