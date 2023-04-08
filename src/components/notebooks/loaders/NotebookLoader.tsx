@@ -1,5 +1,6 @@
 import AccordionLoader from "../../common/accordion/loader/AccordionLoader";
 import MiniLoader from "../../common/button/loader/MiniLoader";
+import DetailsLoader from "../../common/details/loader/DetailsLoader";
 import DropDownMenuLoader from "../../common/dropDownMenu/loader/DropDownMenuLoader";
 import JumbotronLoader from "../../common/jumbotron/loader/JumbotronLoader";
 import PaginationLoader from "../../common/pagination/loader/PaginationLoader";
@@ -29,8 +30,7 @@ function NotebookLoader() {
           </div>
           <hr className="notebook-loader__hr" />
           <div className="notebook-loader__details">
-            <div className="notebook-loader__details--desktop"></div>
-            <div className="notebook-loader__details--mobile"></div>
+            <DetailsLoader />
             <PaginationLoader />
           </div>
           <AccordionLoader />
