@@ -9,6 +9,7 @@ import qnaService, { QNAPutDto } from "../../../services/qnaService";
 import validate from "../../../utils/validate";
 import QNADropDown from "../types/QNADropDown";
 import QNAFields from "../types/QNAFields";
+import queryClient from "../../../react-query/queryClient";
 
 export interface UpdateQNA {
   topics: ITopic[];
@@ -161,6 +162,7 @@ function useUpdateQNA(
         },
       });
       onActivePopUp("");
+      queryClient.invalidateQueries(keys.reviews);
     }
   }, [isSuccess]);
 

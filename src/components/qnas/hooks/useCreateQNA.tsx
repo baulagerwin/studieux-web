@@ -10,6 +10,7 @@ import qnaService from "../../../services/qnaService";
 import validate from "../../../utils/validate";
 import QNADropDown from "../types/QNADropDown";
 import QNAFields from "../types/QNAFields";
+import queryClient from "../../../react-query/queryClient";
 
 export interface CreateQNA {
   topics: ITopic[];
@@ -155,6 +156,7 @@ function useCreateQNA(
           error: "",
         },
       });
+      queryClient.invalidateQueries(keys.reviews);
     }
   }, [isSuccess]);
 

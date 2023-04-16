@@ -33,6 +33,7 @@ function useDeleteTopic(
     if (isSuccess && !searchParams.get("filterBy")) {
       toast.success(`${topic.name} has been successfully deleted.`);
       queryClient.invalidateQueries(keys.qnas);
+      queryClient.invalidateQueries(keys.reviews);
       closeFields();
     }
     if (isSuccess && searchParams.get("filterBy") === topic.name) {
@@ -40,6 +41,7 @@ function useDeleteTopic(
       setSearchParams(searchParams);
       toast.success(`${topic.name} has been successfully deleted.`);
       queryClient.invalidateQueries(keys.qnas);
+      queryClient.invalidateQueries(keys.reviews);
       closeFields();
     }
   }, [isSuccess]);

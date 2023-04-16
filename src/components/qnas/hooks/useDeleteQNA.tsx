@@ -4,6 +4,7 @@ import useHttp from "../../../hooks/useHttp";
 import keys from "../../../react-query/keys";
 import qnaService from "../../../services/qnaService";
 import IQNA from "../../../models/IQNA";
+import queryClient from "../../../react-query/queryClient";
 
 export interface DeleteQNA {
   qna: IQNA;
@@ -29,6 +30,7 @@ function useDeleteQNA(
     if (isSuccess) {
       toast.success(`Question and answer has been successfully deleted.`);
       closeFields();
+      queryClient.invalidateQueries(keys.reviews);
     }
   }, [isSuccess]);
 
