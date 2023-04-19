@@ -24,7 +24,7 @@ function useCreateTopic(
   const { mutate, isError, isLoading, errorMessage, isSuccess } = useHttp<
     TopicDto,
     ITopic
-  >(topicService.post, keys.topics);
+  >(topicService.post, [keys.topics, keys.reviews]);
 
   const initialTopic = {
     topic: {

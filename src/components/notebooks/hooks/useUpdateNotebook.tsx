@@ -10,7 +10,6 @@ import notebookService, {
 } from "../../../services/notebookService";
 import validate from "../../../utils/validate";
 import NotebookFields from "../types/NotebookFields";
-import queryClient from "../../../react-query/queryClient";
 
 export interface UpdateNotebook {
   fields: NotebookFields;
@@ -25,7 +24,10 @@ function useUpdateNotebook(
   onActivePopUp: (value: string) => void
 ): UpdateNotebook {
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
-    useHttp<NotebookPutDto, INotebook>(notebookService.put, keys.notebook);
+    useHttp<NotebookPutDto, INotebook>(notebookService.put, [
+      keys.notebook,
+      keys.notebooks,
+    ]);
 
   const initialFields = {
     notebook: {

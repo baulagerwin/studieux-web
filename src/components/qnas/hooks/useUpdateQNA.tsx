@@ -32,7 +32,7 @@ function useUpdateQNA(
   const { mutate, isError, isLoading, errorMessage, isSuccess } = useHttp<
     QNAPutDto,
     IQNA
-  >(qnaService.put, keys.qnas);
+  >(qnaService.put, [keys.qnas, keys.reviews]);
 
   const initialTopic = "----";
   const initialQNA: QNAFields = {

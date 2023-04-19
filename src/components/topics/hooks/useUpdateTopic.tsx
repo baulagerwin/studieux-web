@@ -9,7 +9,6 @@ import topicService, { TopicPutDto } from "../../../services/topicService";
 import validate from "../../../utils/validate";
 import TopicFields from "../types/TopicFields";
 import { useSearchParams } from "react-router-dom";
-import queryClient from "../../../react-query/queryClient";
 
 export interface UpdateTopic {
   fields: TopicFields;
@@ -25,7 +24,7 @@ function useUpdateTopic(
   onActivePopUp: (value: string) => void
 ): UpdateTopic {
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
-    useHttp<TopicPutDto, ITopic>(topicService.put, keys.topics);
+    useHttp<TopicPutDto, ITopic>(topicService.put, [keys.topics, keys.reviews]);
 
   const initialFields = {
     topic: {
@@ -109,7 +108,6 @@ function useUpdateTopic(
   useEffect(() => {
     if (isSuccess && !searchParams.get("filterBy")) {
       toast.success(`Successfully updated to ${fields.topic.value}.`);
-      queryClient.invalidateQueries(keys.qnas);
       setFields({
         topic: {
           value: "",
@@ -122,7 +120,6 @@ function useUpdateTopic(
       searchParams.set("filterBy", fields.topic.value);
       setSearchParams(searchParams);
       toast.success(`Successfully updated to ${fields.topic.value}.`);
-      queryClient.invalidateQueries(keys.qnas);
       setFields({
         topic: {
           value: "",

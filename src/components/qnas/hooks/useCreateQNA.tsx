@@ -32,7 +32,7 @@ function useCreateQNA(
   const { mutate, isError, isLoading, errorMessage, isSuccess } = useHttp<
     QNADto,
     IQNA
-  >(qnaService.post, keys.qnas);
+  >(qnaService.post, [keys.qnas, keys.reviews]);
 
   const initialTopic = "----";
   const initialQNA: QNAFields = {

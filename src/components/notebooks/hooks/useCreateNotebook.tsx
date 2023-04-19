@@ -25,7 +25,7 @@ function useCreateNotebook(
   const { mutate, isError, isLoading, errorMessage, isSuccess } = useHttp<
     NotebookDto,
     INotebook
-  >(notebookService.post, keys.notebooks);
+  >(notebookService.post, [keys.notebooks]);
 
   const initialFields = {
     notebook: {

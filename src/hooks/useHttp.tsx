@@ -14,13 +14,14 @@ interface Return<T, K> {
 
 function useHttp<T, K>(
   service: (value: T) => Promise<K>,
-  keyToInvalidate: string = ""
+  keysToInvalidate: string[] = []
 ): Return<T, K> {
   const { mutate, data, isLoading, isError, error, isSuccess } = useMutation(
     (value: T) => service(value),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(keyToInvalidate);
+        for (let keyToInvalidate of keysToInvalidate)
+          queryClient.invalidateQueries(keyToInvalidate);
       },
     }
   );

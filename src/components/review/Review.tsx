@@ -41,6 +41,7 @@ function Review() {
     () => reviewService.get(notebookId, queryString),
     {
       keepPreviousData: true,
+      cacheTime: 0,
     }
   );
 

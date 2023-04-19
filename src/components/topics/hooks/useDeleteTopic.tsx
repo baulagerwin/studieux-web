@@ -19,7 +19,7 @@ function useDeleteTopic(
   onActivePopUp: (value: string) => void
 ): DeleteTopic {
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
-    useHttp(topicService.delete, keys.topics);
+    useHttp(topicService.delete, [keys.topics, keys.reviews]);
 
   const [searchParams, setSearchParams] = useSearchParams();
 

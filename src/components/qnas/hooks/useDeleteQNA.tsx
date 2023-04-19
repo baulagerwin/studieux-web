@@ -18,7 +18,7 @@ function useDeleteQNA(
   onActivePopUp: (value: string) => void
 ): DeleteQNA {
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
-    useHttp(qnaService.delete, keys.qnas);
+    useHttp(qnaService.delete, [keys.qnas]);
 
   function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();
