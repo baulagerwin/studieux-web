@@ -10,6 +10,7 @@ import notebookService, {
 } from "../../../services/notebookService";
 import validate from "../../../utils/validate";
 import NotebookFields from "../types/NotebookFields";
+import queryClient from "../../../react-query/queryClient";
 
 export interface UpdateNotebook {
   fields: NotebookFields;

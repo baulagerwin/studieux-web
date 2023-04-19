@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useHttp from "../../../hooks/useHttp";
 import INotebook from "../model/INotebook";
-import keys from "../../../react-query/keys";
 import notebookService from "../../../services/notebookService";
 
 export interface DeleteNotebook {
@@ -19,7 +18,7 @@ function useDeleteNotebook(
 ) {
   const navigate = useNavigate();
   const { mutate, data, isLoading, isError, error, errorMessage, isSuccess } =
-    useHttp(notebookService.delete, keys.notebooks);
+    useHttp(notebookService.delete);
 
   function handleOnSubmit(e: React.FormEvent) {
     e.preventDefault();

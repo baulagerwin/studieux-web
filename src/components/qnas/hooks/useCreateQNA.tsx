@@ -156,7 +156,6 @@ function useCreateQNA(
           error: "",
         },
       });
-      queryClient.invalidateQueries(keys.reviews);
     }
   }, [isSuccess]);
 

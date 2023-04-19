@@ -9,8 +9,6 @@ function Boxes({ notebooks }: Props) {
   return (
     <ul className="boxes grid grid-col-4 gap-4">
       {notebooks.map((notebook: INotebook) => {
-        console.log(notebook._id);
-
         return (
           <li key={notebook._id} className="boxes__item">
             <Link className="boxes__link" to={`/notebooks/${notebook._id}`}>

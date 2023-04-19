@@ -8,7 +8,6 @@ import keys from "../../../react-query/keys";
 import topicService from "../../../services/topicService";
 import validate from "../../../utils/validate";
 import TopicFields from "../types/TopicFields";
-import queryClient from "../../../react-query/queryClient";
 
 export interface CreateTopic {
   fields: TopicFields;
@@ -94,7 +93,6 @@ function useCreateTopic(
   useEffect(() => {
     if (isSuccess) {
       toast.success(`${fields.topic.value} has been successfully added.`);
-      queryClient.invalidateQueries(keys.reviews);
       closeFields();
     }
   }, [isSuccess]);

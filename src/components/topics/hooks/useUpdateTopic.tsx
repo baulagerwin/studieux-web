@@ -123,7 +123,6 @@ function useUpdateTopic(
       setSearchParams(searchParams);
       toast.success(`Successfully updated to ${fields.topic.value}.`);
       queryClient.invalidateQueries(keys.qnas);
-      queryClient.invalidateQueries(keys.reviews);
       setFields({
         topic: {
           value: "",

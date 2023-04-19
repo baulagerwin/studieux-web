@@ -162,7 +162,6 @@ function useUpdateQNA(
         },
       });
       onActivePopUp("");
-      queryClient.invalidateQueries(keys.reviews);
     }
   }, [isSuccess]);
 

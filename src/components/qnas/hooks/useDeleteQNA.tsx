@@ -30,7 +30,6 @@ function useDeleteQNA(
     if (isSuccess) {
       toast.success(`Question and answer has been successfully deleted.`);
       closeFields();
-      queryClient.invalidateQueries(keys.reviews);
     }
   }, [isSuccess]);
 

@@ -28,7 +28,7 @@ function Review() {
 
   const pageSize = 3;
   const [page, setPage] = useState(1);
-
+  const [loaded, setLoaded] = useState(true);
   const slideShows = useRef<{ topic: string; qnas: IQNA[] }[]>([]);
   const [items, setItems] = useState<{ topic: string; qnas: IQNA[] }[]>([]);
   const searchQueryString = searchParams.toString()
@@ -64,10 +64,13 @@ function Review() {
       return;
     }
 
-    slideShows.current = [];
-    slideShows.current = [...slideShows.current, ...data.results];
-    setItems(slideShows.current);
-    return;
+    if (loaded) {
+      slideShows.current = [];
+      slideShows.current = [...slideShows.current, ...data.results];
+      setItems(slideShows.current);
+      setLoaded(false);
+      return;
+    }
   }, [data]);
 
   const [activePopUp, setActivePopUp] = useState("");
