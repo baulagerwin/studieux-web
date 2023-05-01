@@ -2,14 +2,6 @@
 
 Improve your learning by centralizing and organizing your notes. Review your notes on-the-go anywhere anytime.
 
-## Preview
-
-![First Preview](https://i.ibb.co/p31QDhr/studieux-1.png)
-
-<!-- ![First Preview](https://i.ibb.co/p31QDhr/studieux-1.png) -->
-<!-- ![First Preview](https://i.ibb.co/p31QDhr/studieux-1.png) -->
-<!-- ![First Preview](https://i.ibb.co/p31QDhr/studieux-1.png) -->
-
 ## Requirements
 
 Install the following requirements first before proceeding.
