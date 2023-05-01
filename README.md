@@ -4,7 +4,7 @@ Improve your learning by centralizing and organizing your notes. Review your not
 
 ## Preview
 
-![Studieux Web](studieux-web.png)
+![Studieux Web](studieux-web.PNG)
 
 ## Requirements
 
