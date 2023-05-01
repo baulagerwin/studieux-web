@@ -28,7 +28,7 @@ Follow these instructions to run this project on your local machine for developm
   npm install
 ```
 
-3. Run the dev server
+3. Run the dev server in parallel with [studieux-api](https://github.com/baulagerwin/studieux-api).
 
 ```bash
   npm run dev
