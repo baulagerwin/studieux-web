@@ -40,7 +40,14 @@ Follow these instructions to run this project on your local machine for developm
   http://localhost:5173/
 ```
 
-5. Enjoy!
+5. Login with the credentials below
+
+```bash
+  username: testuser
+  password: password
+```
+
+6. Enjoy and explore!
 
 ## Built With
 
