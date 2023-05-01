@@ -2,6 +2,8 @@
 
 Improve your learning by centralizing and organizing your notes. Review your notes on-the-go anywhere anytime.
 
+![Studieux](https://ibb.co/LC0rwNh)
+
 ## Requirements
 
 Install the following requirements first before proceeding.
