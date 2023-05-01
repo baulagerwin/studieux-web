@@ -2,6 +2,10 @@
 
 Improve your learning by centralizing and organizing your notes. Review your notes on-the-go anywhere anytime.
 
+## Preview
+
+![Studieux](Studieux.png)
+
 ## Requirements
 
 Install the following requirements first before proceeding.
