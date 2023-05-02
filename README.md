@@ -1,4 +1,6 @@
-# Introduction
+# Studieux Web
+
+## Introduction
 
 Improve your learning by centralizing and organizing your notes. Review your notes on-the-go anywhere anytime.
 
