@@ -2,7 +2,11 @@ import { Oval } from "react-loader-spinner";
 
 function Submit({ text, isLoading }: { text: string; isLoading: boolean }) {
   return (
-    <button className="btn btn--full grid-span-max" type="submit">
+    <button
+      className="btn btn--full grid-span-max"
+      type="submit"
+      disabled={isLoading}
+    >
       {!isLoading ? (
         text
       ) : (
